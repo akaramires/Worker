@@ -58,8 +58,9 @@ Route::filter('auth.basic', function () {
 */
 
 Route::filter('guest', function () {
-    if (Auth::check())
+    if (Auth::check()) {
         return Redirect::to('/');
+    }
 });
 
 /*
@@ -93,9 +94,7 @@ Route::filter('permission', function ($route, $request, $value) {
     array_shift($permissions);
     array_shift($permissions);
     if (!Auth::user()->hasPermissions($permissions)) {
-        return Redirect::to('/')
-            ->with('errorMsg', 'You don\'t have permission to access the requested page')
-            ->withInput();
+        return Auth::user()->redirectToOwnPage();
     }
 });
 
@@ -107,5 +106,12 @@ Route::filter('permissions', function ($route, $request, $value) {
         return Redirect::to('/')
             ->with('errorMsg', 'You don\'t have permission to access the requested page')
             ->withInput();
+    }
+});
+
+App::error(function (Exception $exception, $code) {
+    switch ($code) {
+        case 404:
+            return Response::view('404', array(), 404);
     }
 });

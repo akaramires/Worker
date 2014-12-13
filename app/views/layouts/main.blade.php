@@ -21,6 +21,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li>{{ HTML::link('profile', 'Profile') }}</li>
+
             @if(Auth::check())
                 <li>{{ HTML::link('logout', 'Logout') }}</li>
             @endif

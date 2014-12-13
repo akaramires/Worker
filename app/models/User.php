@@ -58,4 +58,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         // If all are not required, check that the user has at least 1.
         return !empty($hasPermissions);
     }
+
+    public function redirectToOwnPage ()
+    {
+        $userPermissions = array_fetch($this->permissions->toArray(), 'slug');
+
+        if (sizeof($userPermissions) > 0) {
+            $permission = reset($userPermissions);
+
+            switch ($permission) {
+                case 'developer':
+                    $url = '/';
+                    break;
+                case 'manager':
+                    $url = '/reports';
+                    break;
+                case 'admin':
+                    $url = '/admin';
+                    break;
+            }
+
+            return Redirect::to($url)->with('errorMsg', 'You don\'t have permission to access the requested page');
+        } else {
+            
+            return Redirect::to('login');
+        }
+    }
 }
