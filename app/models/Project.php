@@ -9,19 +9,11 @@
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Permission extends Eloquent
+class Project extends Eloquent
 {
 
     use SoftDeletingTrait;
 
-    protected $table = 'permissions';
-
-    /**
-     * A permission will have many users.
-     */
-    public function users ()
-    {
-        return $this->hasMany('User')->withTimestamps();
-    }
+    protected $table = 'projects';
 
 }

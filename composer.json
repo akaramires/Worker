@@ -8,8 +8,9 @@
     "license"          : "MIT",
     "type"             : "project",
     "require"          : {
-        "laravel/framework": "4.2.*",
-        "twitter/bootstrap": "*"
+        "laravel/framework"        : "4.2.*",
+        "twitter/bootstrap"        : "*",
+        "somepony/l4-cyrillic-slug": "dev-master"
     },
     "autoload"         : {
         "classmap": [

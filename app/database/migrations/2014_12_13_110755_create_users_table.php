@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name', 32);
             $table->boolean('active');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

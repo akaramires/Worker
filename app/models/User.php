@@ -4,11 +4,12 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface
 {
 
-    use UserTrait, RemindableTrait;
+    use UserTrait, RemindableTrait, SoftDeletingTrait;
 
     protected $table = 'users';
 
@@ -80,7 +81,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
             return Redirect::to($url)->with('errorMsg', 'You don\'t have permission to access the requested page');
         } else {
-            
+
             return Redirect::to('login');
         }
     }

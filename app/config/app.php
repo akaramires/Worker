@@ -122,6 +122,7 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
 
+        'Somepony\L4CyrillicSlug\L4CyrillicSlugServiceProvider',
     ),
 
     /*
@@ -189,6 +190,7 @@ return array(
         'Validator'         => 'Illuminate\Support\Facades\Validator',
         'View'              => 'Illuminate\Support\Facades\View',
 
+        'Slug'              => 'Somepony\L4CyrillicSlug\Facades\Slug',
     ),
 
 );

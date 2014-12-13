@@ -29,7 +29,7 @@ class UserTableSeeder extends Seeder
                 'email'      => 'email4devs@gmail.com',
                 'password'   => Hash::make('admin'),
                 'active'     => 1,
-                'role'       => array(1),
+                'role'       => array(1, 2),
             ),
             array(
                 'first_name' => 'Project',
