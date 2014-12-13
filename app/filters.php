@@ -43,7 +43,7 @@ Route::filter('auth', function () {
 
 
 Route::filter('auth.basic', function () {
-    return Auth::basic();
+    return Auth::basic('username');
 });
 
 /*
@@ -88,29 +88,24 @@ Route::filter('csrf', function () {
 |
 */
 
-// Filter to check that a user has one of the required permissions.
 Route::filter('permission', function ($route, $request, $value) {
     $permissions = func_get_args();
     array_shift($permissions);
     array_shift($permissions);
     if (!Auth::user()->hasPermissions($permissions)) {
-        return App::abort(401);
+        return Redirect::to('/')
+            ->with('errorMsg', 'You don\'t have permission to access the requested page')
+            ->withInput();
     }
 });
 
-// Filter to check that a user has all of the required permissions.
 Route::filter('permissions', function ($route, $request, $value) {
     $permissions = func_get_args();
     array_shift($permissions);
     array_shift($permissions);
     if (!Auth::user()->hasPermissions($permissions, true)) {
-        return App::abort(401);
-    }
-});
-
-App::error(function ($exception, $code) {
-    switch ($code) {
-        case 401:
-            return Response::view('401', array(), 401);
+        return Redirect::to('/')
+            ->with('errorMsg', 'You don\'t have permission to access the requested page')
+            ->withInput();
     }
 });

@@ -1,8 +1,7 @@
 <?php
 
-class HomeController extends BaseController
+class AdminController extends BaseController
 {
-
     public function index ()
     {
         return View::make('hello');

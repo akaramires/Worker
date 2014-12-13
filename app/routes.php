@@ -5,17 +5,13 @@ Route::post('login', 'UserController@process');
 Route::get('logout', 'UserController@logout');
 
 Route::group(['before' => 'auth'], function () {
+    Route::get('/', 'HomeController@index');
+});
 
-    Route::get('/', function () {
-        return 'You have reached the admin dashboard.';
-    });
+Route::group(array('before' => 'permission:admin'), function () {
+    Route::resource('admin', 'AdminController');
+});
 
-    Route::get('admin', ['before' => 'permission:admin', function () {
-        return 'You have reached the admin page.';
-    }]);
-
-    Route::get('reports', ['before' => 'permission:manager', function () {
-        return 'You have reached the manager page.';
-    }]);
-
+Route::group(array('before' => 'permission:manager'), function () {
+    Route::resource('reports', 'ReportController');
 });

@@ -20,7 +20,10 @@
           <a class="navbar-brand" href="/">Track Time</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-right">
+            @if(Auth::check())
+                <li>{{ HTML::link('logout', 'Logout') }}</li>
+            @endif
           </ul>
         </div>
       </div>
@@ -30,7 +33,7 @@
 @section('footer')
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Place sticky footer content here.</p>
+        <p class="text-muted text-center">2014</p>
       </div>
     </footer>
 @stop

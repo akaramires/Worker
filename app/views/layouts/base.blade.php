@@ -8,32 +8,32 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Elmar Abdurayimov">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Elmar Abdurayimov">
 
-    <title>Track Your Time</title>
+        <title>Track Your Time</title>
 
-    <link href="/packages/bootstrap/css/bootstrap-flat.min.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
+        {{ HTML::style('packages/bootstrap/css/bootstrap-flat.min.css') }}
+        {{ HTML::style('css/styles.css')}}
+    </head>
 
-    {{--<link href="sticky-footer-navbar.css" rel="stylesheet">--}}
-  </head>
+    <body>
 
-  <body>
+        @yield('header')
 
-    @yield('header')
+        <div class="container">
+            @include('partials.flash')
 
-    <div class="container">
-      @yield('content')
-    </div>
+            @yield('content')
+        </div>
 
-    @yield('footer')
+        @yield('footer')
 
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script src="/packages/bootstrap/js/bootstrap.min.js"></script>
-  </body>
+        <script src="/js/jquery-1.11.1.min.js"></script>
+        <script src="/packages/bootstrap/js/bootstrap.min.js"></script>
+    </body>
 </html>

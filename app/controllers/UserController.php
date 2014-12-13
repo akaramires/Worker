@@ -17,11 +17,14 @@ class UserController extends BaseController
 
     public function process ()
     {
-        if (Auth::attempt(['email' => Input::get('email'), 'password' => Input::get('password')])) {
-            return Redirect::intended('admin');
+        if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))) {
+            return Redirect::to('/')
+                ->with('successMsg', 'You are now logged in!');
+        } else {
+            return Redirect::to('login')
+                ->with('errorMsg', 'Your username/password combination was incorrect')
+                ->withInput();
         }
-
-        return App::abort(401);
     }
 
     public function logout ()
