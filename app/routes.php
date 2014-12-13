@@ -15,34 +15,77 @@ Route::get('/', function () {
     return View::make('hello');
 });
 
-Route::get('/start', function () {
-    $subscriber       = new Role();
-    $subscriber->name = 'Subscriber';
-    $subscriber->save();
+Route::get('admin', [
+    'before' => 'auth',
+    'uses'   => 'AdminController@index',
+    'as'     => 'admin'
+]);
 
-    $author       = new Role();
-    $author->name = 'Author';
-    $author->save();
+Route::get('admin/users', [
+    'before' => 'auth|permission:user-manager',
+    'uses'   => 'Admin\UsersController@index',
+    'as'     => 'admin.user'
+]);
 
-    $read               = new Permission();
-    $read->name         = 'can_read';
-    $read->display_name = 'Can Read Posts';
-    $read->save();
+Route::get('admin/accounts', [
+    'before' => 'auth|permission:user-manager,accounts-manager',
+    'uses'   => 'Admin\AccountsController@index',
+    'as'     => 'admin.accounts'
+]);
 
-    $edit               = new Permission();
-    $edit->name         = 'can_edit';
-    $edit->display_name = 'Can Edit Posts';
-    $edit->save();
+Route::get('admin/accounts/users', [
+    'before' => 'auth|permissions:user-manager,accounts-manager',
+    'uses'   => 'Admin\AccountsUsersController@index',
+    'as'     => 'admin.accounts.user'
+]);
 
-    $subscriber->attachPermission($read);
-    $author->attachPermission($read);
-    $author->attachPermission($edit);
+Route::filter('permission', function ($route, $request, $value) {
+    $permissions = func_get_args();
+    array_shift($permissions);
+    array_shift($permissions);
 
-    $user1 = User::find(1);
-    $user2 = User::find(2);
+    if (!Auth::user()->hasPermissions($permissions)) {
+        return App::abort(401);
+    }
+});
 
-    $user1->attachRole($subscriber);
-    $user2->attachRole($author);
+Route::filter('permissions', function ($route, $request, $value) {
+    $permissions = func_get_args();
+    array_shift($permissions);
+    array_shift($permissions);
 
-    return 'Woohoo!';
+    if (!Auth::user()->hasPermissions($permissions, true)) {
+        return App::abort(401);
+    }
+});
+
+Route::group(['prefix' => 'admin', 'before' => 'auth'], function () {
+    // No permissions required.
+    Route::get('/', function () {
+        return 'You have reached the admin dashboard.';
+    });
+
+    // User must have post-editor OR content-editor permissions.
+    Route::get('posts', [
+        'before' => 'permission:post-editor,content-editor',
+        function () {
+            return 'You have reached the posts page.';
+        }
+    ]);
+
+    // User must have content-editor permission.
+    Route::get('media', [
+        'before' => 'permission:content-editor',
+        function () {
+            return 'You have reached the media page.';
+        }
+    ]);
+
+    // Userm ust have post-editor AND content-editor permissions.
+    Route::get('posts/media', [
+        'before' => 'permissions:post-editor,content-editor',
+        function () {
+            return 'You have reached the post media page.';
+        }
+    ]);
 });
