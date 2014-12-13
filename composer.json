@@ -10,7 +10,8 @@
     "require"          : {
         "laravel/framework"        : "4.2.*",
         "twitter/bootstrap"        : "*",
-        "somepony/l4-cyrillic-slug": "dev-master"
+        "somepony/l4-cyrillic-slug": "dev-master",
+        "fzaninotto/faker"         : "1.2.*@dev"
     },
     "autoload"         : {
         "classmap": [

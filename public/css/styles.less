@@ -6,6 +6,7 @@ html {
 }
 
 body {
+    font-size: 14px;
     margin-bottom: 60px;
     & > .container {
         padding: 60px 15px 0;
@@ -28,3 +29,63 @@ body {
     margin: 20px 0;
 }
 
+.col {
+    &-date {
+        width: 100px;
+    }
+
+    &-hours {
+        width: 65px;
+    }
+
+    &-project {
+        //        white-space: nowrap;
+    }
+    &-operations {
+        width: 125px !important;
+        min-width: 120px !important;
+    }
+}
+
+.width-100() {
+    width: 100px;
+}
+
+.date-input {
+    width: 100px !important;
+    text-align: center;
+}
+
+.hr {
+    margin: 10px 0 20px;
+    border-bottom: 1px solid @brand-success;
+}
+
+.panel-hours {
+    .filter-row {
+        margin-bottom: 0;
+        li {
+            vertical-align: top;
+            .input-group {
+                input {
+                    &:first-of-type {
+                        border-right-width: 1px;
+                    }
+                    &:last-of-type {
+                        border-left-width: 1px;
+                    }
+                }
+            }
+        }
+    }
+
+    .table-hours {
+        tr {
+            td, th {
+                padding-left: 10px;
+                padding-right: 10px;
+                vertical-align: middle !important;
+            }
+        }
+    }
+}

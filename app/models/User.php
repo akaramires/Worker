@@ -24,9 +24,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         'password_confirmation' => 'required|alpha_num|between:6,12'
     );
 
-    /**
-     * A user will belong to many permissions.
-     */
     public function permissions ()
     {
         return $this->belongsToMany('Permission')->withTimestamps();
@@ -58,6 +55,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
         // If all are not required, check that the user has at least 1.
         return !empty($hasPermissions);
+    }
+
+    public function hours ()
+    {
+        return $this->hasMany('Hour');
     }
 
     public function redirectToOwnPage ()

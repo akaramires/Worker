@@ -20,6 +20,7 @@ class CreateHoursTable extends Migration
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->longText('description');
+            $table->double('count');
             $table->date('date');
             $table->softDeletes();
             $table->timestamps();

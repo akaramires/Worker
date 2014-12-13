@@ -9,16 +9,20 @@
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Project extends Eloquent
+class Hour extends Eloquent
 {
 
     use SoftDeletingTrait;
 
-    protected $table = 'projects';
+    protected $table = 'hours';
 
-    public function hours ()
+    public function user ()
     {
-        return $this->hasMany('Hour');
+        return $this->belongsTo('User');
     }
 
+    public function project ()
+    {
+        return $this->belongsTo('Project');
+    }
 }

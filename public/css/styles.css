@@ -3,6 +3,7 @@ html {
   min-height: 100%;
 }
 body {
+  font-size: 14px;
   margin-bottom: 60px;
 }
 body > .container {
@@ -21,4 +22,40 @@ body > .container {
 }
 .container .text-muted {
   margin: 20px 0;
+}
+.col-date {
+  width: 100px;
+}
+.col-hours {
+  width: 65px;
+}
+.col-operations {
+  width: 125px !important;
+  min-width: 120px !important;
+}
+.date-input {
+  width: 100px !important;
+  text-align: center;
+}
+.hr {
+  margin: 10px 0 20px;
+  border-bottom: 1px solid #18bc9c;
+}
+.panel-hours .filter-row {
+  margin-bottom: 0;
+}
+.panel-hours .filter-row li {
+  vertical-align: top;
+}
+.panel-hours .filter-row li .input-group input:first-of-type {
+  border-right-width: 1px;
+}
+.panel-hours .filter-row li .input-group input:last-of-type {
+  border-left-width: 1px;
+}
+.panel-hours .table-hours tr td,
+.panel-hours .table-hours tr th {
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle !important;
 }
