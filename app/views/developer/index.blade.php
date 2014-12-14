@@ -16,8 +16,8 @@
             ) ) }}
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Date</label>
-                    <div class="col-sm-10">
+                    <label class="col-xs-12 col-md-2 control-label">Date</label>
+                    <div class="col-xs-4 col-md-4">
                         {{ Form::text( 'hours_date', '', array(
                             'id' => 'hours_date',
                             'class' => 'form-control',
@@ -25,6 +25,9 @@
                             'data-date-format' => 'YYYY-MM-DD',
                         ) ) }}
                         <p class="help-block text-right"></p>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <button class="btn btn-success" type="button" onclick="$('#hours_date').val('<?php echo date('Y-m-d'); ?>')">Today</button>
                     </div>
                 </div>
 

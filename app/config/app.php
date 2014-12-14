@@ -123,6 +123,7 @@ return array(
         'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'Somepony\L4CyrillicSlug\L4CyrillicSlugServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
     ),
 
     /*

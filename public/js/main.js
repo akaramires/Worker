@@ -27,6 +27,9 @@
                         });
 
                         $('select#hours_task').prop("disabled", false);
+                        if (Object.keys(response).length == 1) {
+                            $('select#hours_task').val(Object.keys(response)[0]);
+                        }
                     }
                 });
             });

@@ -35,7 +35,9 @@ class HomeController extends BaseController
             ));
         }
 
-        $validator = Validator::make(Input::all(), Hour::$rules);
+        $data = Input::all();
+
+        $validator = Validator::make($data, Hour::$rules);
 
         if ($validator->fails()) {
             return Response::json(array(
@@ -46,10 +48,25 @@ class HomeController extends BaseController
             ), 200);
         }
 
-        return Response::json(array(
-            'success' => true,
-            'msg'     => 'Hours created successfully',
-        ), 200);
+        $model              = new Hour;
+        $model->user_id     = Auth::user()->id;
+        $model->date        = $data['hours_date'];
+        $model->project_id  = $data['hours_task'];
+        $model->description = $data['hours_description'];
+        $model->count       = $data['hours_count'];
+
+        if ($model->save()) {
+            return Response::json(array(
+                'success' => true,
+                'msg'     => 'Hours created successfully',
+            ), 200);
+        } else {
+            return Response::json(array(
+                'success' => false,
+                'type'    => 'save',
+                'msg'     => 'Errors were encountered during the save process, please try again.',
+            ), 200);
+        }
     }
 
     public function tasks ()

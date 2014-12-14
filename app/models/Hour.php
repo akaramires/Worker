@@ -9,6 +9,19 @@
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
+/**
+ * Class Hour
+ *
+ * @property      int      $id
+ * @property      string   $description
+ * @property      int      $count
+ * @property      string   $date
+ * @property      string   $deleted_at
+ * @property      string   $created_at
+ * @property      string   $updated_at
+ * @property-read \User    $user
+ * @property-read \Project $project
+ */
 class Hour extends Eloquent
 {
 
@@ -23,6 +36,7 @@ class Hour extends Eloquent
         'hours_count'       => 'required|numeric|min:1|max:8',
         'hours_description' => 'required',
     );
+
 
     public function user ()
     {
