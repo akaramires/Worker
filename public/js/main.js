@@ -8,6 +8,7 @@
 
     jQuery(document).ready(function ($) {
         if ($('select#hours_project').length > 0) {
+
             $('select#hours_project').change(function () {
                 jQuery.ajax({
                     url       : '/tasks',
@@ -69,6 +70,11 @@
                 });
 
                 return false;
+            });
+
+            $('#hours_date').datetimepicker({
+                pickTime: false,
+                maxDate : new Date()
             });
         }
     });

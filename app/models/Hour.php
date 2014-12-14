@@ -17,7 +17,7 @@ class Hour extends Eloquent
     protected $table = 'hours';
 
     public static $rules = array(
-        'hours_date'        => 'required|date',
+        'hours_date'        => 'required|date|before:"now"',
         'hours_project'     => 'required|integer|min:1',
         'hours_task'        => 'required|integer|min:1',
         'hours_count'       => 'required|numeric|min:1|max:8',

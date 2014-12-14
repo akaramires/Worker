@@ -13,7 +13,7 @@
             'class' => 'form-horizontal',
             'method' => 'post',
             'id' => 'form-add-hours'
-            )) }}
+            ) ) }}
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Date</label>
@@ -22,6 +22,7 @@
                             'id' => 'hours_date',
                             'class' => 'form-control',
                             'required' => true,
+                            'data-date-format' => 'YYYY-MM-DD',
                         ) ) }}
                         <p class="help-block text-right"></p>
                     </div>
