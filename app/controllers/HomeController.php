@@ -8,7 +8,7 @@ class HomeController extends BaseController
         if (Request::ajax()) {
         } else {
 
-            $hours = Auth::user()->hours()->paginate(10);
+            $hours = Auth::user()->hours()->orderBy('id', 'desc')->paginate(10);
 
             foreach ($hours as &$hour) {
                 if ($hour->project->parent_id == 0) {
@@ -58,6 +58,7 @@ class HomeController extends BaseController
         if ($model->save()) {
             return Response::json(array(
                 'success' => true,
+                'id'      => $model->id,
                 'msg'     => 'Hours created successfully',
             ), 200);
         } else {
@@ -67,6 +68,19 @@ class HomeController extends BaseController
                 'msg'     => 'Errors were encountered during the save process, please try again.',
             ), 200);
         }
+    }
+
+    public function destroy ($id)
+    {
+        $hours = Auth::user()->hours()->find($id);
+        if (!$hours) {
+            return Redirect::to('/')->with('errorMsg', 'You don\'t have permission to access the requested page');
+
+        }
+
+        $hours->delete();
+
+        return Redirect::to('/')->with('successMsg', 'The entity was deleted successfully.');
     }
 
     public function tasks ()

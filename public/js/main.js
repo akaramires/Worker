@@ -54,7 +54,24 @@
                     },
                     success   : function (response) {
                         if (response.success) {
-
+                            $('.table-hours tbody tr:first-of-type').before('<tr>' +
+                            '<td class="text-center">' + $form.find('[name=hours_date]').val() + '</td>' +
+                            '<td class="text-center">' + $form.find('[name=hours_count]').val() + '</td>' +
+                            '<td class="col-project">' + $form.find('[name=hours_project] option:selected').text() + '</td>' +
+                            '<td class="col-project">' + $form.find('[name=hours_task] option:selected').text() + '</td>' +
+                            '<td>' + $form.find('[name=hours_description]').val() + '</td>' +
+                            '<td class="text-center">' +
+                            '<div class="btn-group">' +
+                            '<button type="button" class="btn btn-warning btn-sm">Edit</button>' +
+                            '<button type="button" class="btn btn-danger btn-sm">Delete</button>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>');
+                            $form.find('[name=hours_date]').val('');
+                            $form.find('[name=hours_count]').val('');
+                            $form.find('[name=hours_project]').val('');
+                            $form.find('[name=hours_task]').val('');
+                            $form.find('[name=hours_description]').val('');
                         } else {
                             if (response.type == 'validation') {
                                 $.each(response.errors, function (key, value) {
@@ -80,6 +97,13 @@
                 maxDate : new Date()
             });
         }
+
+        $('.form-delete-hours').submit(function (e) {
+            if (!confirm('Are you sure?')) {
+                e.preventDefault();
+                return false;
+            }
+        });
     });
 
 })(jQuery);

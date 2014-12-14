@@ -116,9 +116,6 @@
                         <li>
                             <select name="project" class="form-control input-sm">
                                 <option value="0" selected>Not selected</option>
-                                {{--@foreach ($projects as $project)--}}
-                                    {{--<option value="{{$project->id}}">{{$project->title}}</option>--}}
-                                {{--@endforeach--}}
                             </select>
                         </li>
                         <li>
@@ -131,9 +128,6 @@
                         </li>
                     </ul>
                 </div>
-                {{--<div class="col-sm-2">--}}
-                    {{--<button type="button" class="btn btn-block btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add</button>--}}
-                {{--</div>--}}
             </div>
         </div>
 
@@ -156,10 +150,11 @@
                         <td class="col-project">{{$hour->project_child}}</td>
                         <td>{{ $hour->description }}</td>
                         <td class="text-center">
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-warning btn-sm">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                            </div>
+                            <button data-hours-id="{{$hour->id}}" type="button" class="btn btn-warning btn-sm btn-edit-hours pull-left">Edit</button>
+                            {{ Form::open(array('url' => '/' . $hour->id, 'class' => 'form-delete-hours')) }}
+                                {{ Form::hidden('_method', 'DELETE') }}
+                                {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-sm pull-right')) }}
+                            {{ Form::close() }}
                         </td>
                     </tr>
                 @endforeach
