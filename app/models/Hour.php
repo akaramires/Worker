@@ -16,6 +16,14 @@ class Hour extends Eloquent
 
     protected $table = 'hours';
 
+    public static $rules = array(
+        'hours_date'        => 'required|date',
+        'hours_project'     => 'required|integer|min:1',
+        'hours_task'        => 'required|integer|min:1',
+        'hours_count'       => 'required|numeric|min:1|max:8',
+        'hours_description' => 'required',
+    );
+
     public function user ()
     {
         return $this->belongsTo('User');

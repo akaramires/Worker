@@ -59,3 +59,11 @@ body > .container {
   padding-right: 10px;
   vertical-align: middle !important;
 }
+#form-add-hours .form-error {
+  line-height: 43px;
+  margin: 0;
+}
+#form-add-hours .help-block {
+  padding: 0;
+  margin: 0;
+}

@@ -9,33 +9,46 @@
 
 @section('content')
     <div class="row">
-        <form class="form-horizontal" role="form">
+        {{ Form::open( array(
+            'class' => 'form-horizontal',
+            'method' => 'post',
+            'id' => 'form-add-hours'
+            )) }}
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Date</label>
                     <div class="col-sm-10">
-                        <input name="date" type="text" class="form-control">
+                        {{ Form::text( 'hours_date', '', array(
+                            'id' => 'hours_date',
+                            'class' => 'form-control',
+                            'required' => true,
+                        ) ) }}
+                        <p class="help-block text-right"></p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Project</label>
                     <div class="col-sm-10">
-                        <select name="project" class="form-control">
-                            <option value="0" selected>Not selected</option>
-                            @foreach ($projects as $project)
-                                <option value="{{$project->id}}">{{$project->title}}</option>
-                            @endforeach
-                        </select>
+                        {{ Form::select('hours_project', array(null=>'Please Select') + $projects, '', array(
+                            'id' => 'hours_project',
+                            'class' => 'form-control',
+                            'required' => true,
+                        ) ); }}
+                        <p class="help-block text-right"></p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Task</label>
                     <div class="col-sm-10">
-                        <select name="task" class="form-control" disabled>
-                            <option value="0" selected>Not selected</option>
-                        </select>
+                        {{ Form::select('hours_task', array(null=>'Please Select'), '', array(
+                            'id' => 'hours_task',
+                            'class' => 'form-control',
+                            'required' => true,
+                            'disabled' => 'disabled'
+                        ) ); }}
+                        <p class="help-block text-right"></p>
                     </div>
                 </div>
             </div>
@@ -43,25 +56,44 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Hours</label>
                     <div class="col-sm-10">
-                        <input name="hours" type="text" class="form-control">
+                        {{ Form::number( 'hours_count', '', array(
+                            'id' => 'hours_count',
+                            'class' => 'form-control',
+                            'required' => true,
+                        ) ) }}
+                        <p class="help-block text-right"></p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                        <textarea name="description" class="form-control" cols="30" rows="3"></textarea>
+                        {{ Form::textarea( 'hours_description', '', array(
+                            'id' => 'hours_description',
+                            'class' => 'form-control',
+                            'required' => true,
+                            'rows' => 3,
+                        ) ) }}
+                        <p class="help-block text-right"></p>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-offset-9 col-sm-3">
-                        <button type="button" class="btn btn-success btn-block"><span class="glyphicon glyphicon-plus"></span> Add</button>
+                    <div class="col-sm-9">
+                        <p class="text-right text-danger form-error"></p>
+                    </div>
+                    <div class="col-sm-3">
+                        {{ Form::submit('Save', array(
+                            'id' => 'hours_description',
+                            'class' => 'btn btn-success btn-block',
+                            'required' => true,
+                            'rows' => 3,
+                        ) )}}
                     </div>
                 </div>
             </div>
             <div class="clearfix"></div>
-        </form>
+        {{ Form::close() }}
     </div>
 
     <div class="hr"></div>
@@ -80,9 +112,9 @@
                         <li>
                             <select name="project" class="form-control input-sm">
                                 <option value="0" selected>Not selected</option>
-                                @foreach ($projects as $project)
-                                    <option value="{{$project->id}}">{{$project->title}}</option>
-                                @endforeach
+                                {{--@foreach ($projects as $project)--}}
+                                    {{--<option value="{{$project->id}}">{{$project->title}}</option>--}}
+                                {{--@endforeach--}}
                             </select>
                         </li>
                         <li>
@@ -100,6 +132,7 @@
                 {{--</div>--}}
             </div>
         </div>
+
         <table class="table table-condensed table-hover table-bordered table-hours">
             <thead>
                 <tr>
@@ -117,20 +150,7 @@
                         <td class="text-center">{{$hour->count}}</td>
                         <td class="col-project">{{$hour->project_parent}}</td>
                         <td class="col-project">{{$hour->project_child}}</td>
-                        <td>
-                            @if(strlen($hour->description) > 60)
-                                {{ substr($hour->description, 0, 60) }}... <button class="btn btn-xs btn-link" data-toggle="modal" data-target="#moreDescription{{$hour->id}}"> more</button>
-                                <div class="modal fade" id="moreDescription{{$hour->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">{{ $hour->description }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
-                                {{ $hour->description }}
-                            @endif
-                        </td>
+                        <td>{{ $hour->description }}</td>
                         <td class="text-center">
                             <div class="btn-group" role="group" aria-label="...">
                                 <button type="button" class="btn btn-warning btn-sm">Edit</button>
@@ -141,5 +161,10 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="text-center panel-body">
+            {{ $hours->links() }}
+        </div>
+
     </div>
 @stop
