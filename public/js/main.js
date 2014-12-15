@@ -7,6 +7,20 @@
     'use strict';
 
     $(document).ready(function ($) {
+        $('.form-delete-hours').submit(function (e) {
+            if (!confirm('Are you sure?')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        addHours();
+        alert2flash();
+        filterDate();
+        filterProject();
+    });
+
+    function addHours() {
         var $formHours = $('#form-add-hours');
 
         if ($formHours.length > 0) {
@@ -79,7 +93,6 @@
                                 });
                             } else {
                                 flashError(response.msg);
-                                //$form.find('.form-error').html(response.msg);
                             }
                         }
                     }
@@ -93,14 +106,66 @@
                 maxDate : new Date()
             });
         }
+    }
 
-        $('.form-delete-hours').submit(function (e) {
-            if (!confirm('Are you sure?')) {
-                e.preventDefault();
-                return false;
-            }
-        });
+    function filterDate() {
+        var filterDateFrom = $('#filter-date-from');
+        var filterDateTo = $('#filter-date-to');
 
+        if (filterDateFrom.length > 0 && filterDateTo.length > 0) {
+            filterDateFrom.datetimepicker({
+                pickTime: false
+            });
+
+            filterDateTo.datetimepicker({
+                pickTime: false
+            });
+
+            filterDateFrom.on("dp.change", function (e) {
+                filterDateTo.data("DateTimePicker").setMinDate(e.date);
+            });
+
+            filterDateTo.on("dp.change", function (e) {
+                filterDateFrom.data("DateTimePicker").setMaxDate(e.date);
+            });
+        }
+    }
+
+    function filterProject() {
+        var filterProject = $('#filter-project');
+        var filterTask = $('#filter-task');
+
+        if (filterProject.length > 0 && filterTask.length > 0) {
+            filterProject.change(function () {
+                var $this = $(this);
+
+                jQuery.ajax({
+                    url       : '/tasks',
+                    type      : 'POST',
+                    data      : {
+                        option: $this.val()
+                    },
+                    beforeSend: function () {
+                        filterTask.prop("disabled", true);
+                        filterTask.find('option').slice(1).remove();
+                    },
+                    success   : function (response) {
+
+                        $.each(response, function (index, element) {
+                            filterTask.append('<option value="' + index + '">' + element + '</option>');
+                        });
+
+                        filterTask.prop("disabled", false);
+                        if (Object.keys(response).length == 1) {
+                            filterTask.val(Object.keys(response)[0]);
+                        }
+                    }
+                });
+            });
+        }
+    }
+
+    function alert2flash() {
         $('.alert.alert-success').each(function () {
             flashSuccess($.trim($(this).html()));
         });
@@ -112,7 +177,7 @@
         $('.alert.alert-warning').each(function () {
             flashWarning($.trim($(this).html()));
         });
-    });
+    }
 
     function flash(text, type) {
         noty({
@@ -142,4 +207,5 @@
     function flashWarning(text) {
         flash(text, 'warning');
     }
-})(jQuery);
+})
+(jQuery);

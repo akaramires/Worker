@@ -109,19 +109,36 @@
                     <ul class="list-inline filter-row">
                         <li>
                             <div class="input-group input-group-sm">
-                              <input type="text" name="hours-date-from" class="form-control date-input" placeholder="Date from">
-                              <input type="text" name="hours-date-to" class="form-control date-input" placeholder="Date to">
+                                {{ Form::text( 'filter-date-from', '', array(
+                                    'id' => 'filter-date-from',
+                                    'class' => 'form-control date-input',
+                                    'required' => true,
+                                    'data-date-format' => 'YYYY-MM-DD',
+                                    'placeholder' => 'Date from'
+                                ) ) }}
+                                {{ Form::text( 'filter-date-to', '', array(
+                                    'id' => 'filter-date-to',
+                                    'class' => 'form-control date-input',
+                                    'required' => true,
+                                    'data-date-format' => 'YYYY-MM-DD',
+                                    'placeholder' => 'Date to'
+                                ) ) }}
                             </div>
                         </li>
                         <li>
-                            <select name="project" class="form-control input-sm">
-                                <option value="0" selected>Not selected</option>
-                            </select>
+                            {{ Form::select('filter-project', array(null=>'Please Select') + $projects, '', array(
+                                'id' => 'filter-project',
+                                'class' => 'form-control input-sm',
+                                'required' => true,
+                            ) ); }}
                         </li>
                         <li>
-                            <select name="task" class="form-control input-sm" disabled>
-                                <option value="0" selected>Not selected</option>
-                            </select>
+                            {{ Form::select('filter-task', array(null=>'Please Select'), '', array(
+                                'id' => 'filter-task',
+                                'class' => 'form-control input-sm',
+                                'required' => true,
+                                'disabled' => 'disabled'
+                            ) ); }}
                         </li>
                         <li>
                             <button type="button" class="btn btn-info btn-sm" disabled>Apply</button>
