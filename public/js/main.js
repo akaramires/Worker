@@ -124,6 +124,13 @@
 
             filterDateTo.datetimepicker({
                 pickTime: false
+            })
+
+            filterDateFrom.on("dp.hide", function (e) {
+                if (!e.date.hasOwnProperty('_strict') && !filterDateTo.val()) {
+                    filterDateTo.data("DateTimePicker").setDate(e.date);
+                    filterDateTo.trigger('focus')
+                }
             });
 
             filterDateFrom.on("dp.change", function (e) {
