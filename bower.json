@@ -1,24 +1,25 @@
 {
-    "name": "Work",
-    "version": "1.0.0",
-    "homepage": "https://github.com/akaramires/Worker-Laravel",
-    "authors": [
-        "akaramires <e.abdurayimov@gmail.com>"
-    ],
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "jquery": "~2.1.1",
-        "bootstrap": "~3.3.1",
-        "noty": "~2.3.2",
-        "bootstrap-flat": "http://bootswatch.com/flatly/bootstrap.min.css",
-        "bootstrap-flat-valiables": "http://bootswatch.com/flatly/variables.less",
-        "eonasdan-bootstrap-datetimepicker": "git@github.com:Eonasdan/bootstrap-datetimepicker.git#~3.1.3"
-    }
+  "name": "Work",
+  "version": "1.0.0",
+  "homepage": "https://github.com/akaramires/Worker-Laravel",
+  "authors": [
+    "akaramires <e.abdurayimov@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.1",
+    "noty": "~2.3.2",
+    "bootstrap-flat": "http://bootswatch.com/flatly/bootstrap.min.css",
+    "bootstrap-flat-valiables": "http://bootswatch.com/flatly/variables.less",
+    "bootstrap-datetimepicker": "git@github.com:Eonasdan/bootstrap-datetimepicker.git#~3.1.3",
+    "animate": "git@github.com:daneden/animate.css.git#~3.2.0"
+  }
 }
