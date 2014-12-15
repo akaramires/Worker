@@ -48,7 +48,7 @@ class HomeController extends BaseController
 
             $projects = Project::where('parent_id', '=', 0)->orderBy('title')->lists('title', 'id');
 
-            return View::make('developer/index', array('projects' => $projects, 'hours' => $hours));
+            return View::make('developer/index', array('projects' => $projects, 'hours' => $hours))->with('page_title', 'Your hours');
         }
     }
 

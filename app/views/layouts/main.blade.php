@@ -20,9 +20,12 @@
           <a class="navbar-brand" href="/">Work</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+                <li><a>{{!empty($page_title) ? $page_title :''}}</a></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             @if(Auth::check())
-                <li>{{ HTML::link('profile', Auth::user()->first_name .' ' . Auth::user()->last_name) }}</li>
+                <li>{{ HTML::link('reset', Auth::user()->first_name .' ' . Auth::user()->last_name) }}</li>
                 <li>{{ HTML::link('logout', 'Logout') }}</li>
             @endif
           </ul>

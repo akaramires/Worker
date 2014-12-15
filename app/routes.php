@@ -3,6 +3,8 @@
 Route::get('login', 'UserController@index');
 Route::post('login', 'UserController@process');
 Route::get('logout', 'UserController@logout');
+Route::get('reset', 'UserController@reset');
+Route::post('reset', 'UserController@resetProcess');
 
 Route::group(array('before' => 'auth'), function () {
     Route::post('/tasks', 'HomeController@tasks');

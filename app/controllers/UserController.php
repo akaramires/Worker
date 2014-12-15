@@ -33,4 +33,33 @@ class UserController extends BaseController
 
         return Redirect::to('login');
     }
+
+    public function reset ()
+    {
+        return View::make("user/reset")->with('page_title', 'Password reset');
+    }
+
+    public function resetProcess ()
+    {
+        if (Session::token() !== Input::get('_token')) {
+            return Redirect::to('reset')->with('errorMsg', 'Unauthorized attempt to create hours');
+        }
+
+        $data = Input::all();
+
+        $validator = Validator::make($data, array(
+            'password'              => 'required|alpha_num|between:6,12|confirmed',
+            'password_confirmation' => 'required|alpha_num|between:6,12'
+        ));
+
+        if ($validator->fails()) {
+            return Redirect::to('reset')->withErrors($validator);
+        }
+
+        $user           = User::find(Auth::user()->id);
+        $user->password = Hash::make($data['password']);
+        $user->save();
+
+        return Redirect::to('/')->with('successMsg', 'Your password was successfully changed.');
+    }
 }

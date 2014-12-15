@@ -10,18 +10,18 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
  * User
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\Permission[] $permissions
- * @property-read \Illuminate\Database\Eloquent\Collection|\Hour[] $hours
- * @property integer $id
- * @property string $username
- * @property string $email
- * @property string $password
- * @property string $first_name
- * @property string $last_name
- * @property boolean $active
- * @property string $remember_token
- * @property string $deleted_at
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Hour[]       $hours
+ * @property integer                                                     $id
+ * @property string                                                      $username
+ * @property string                                                      $email
+ * @property string                                                      $password
+ * @property string                                                      $first_name
+ * @property string                                                      $last_name
+ * @property boolean                                                     $active
+ * @property string                                                      $remember_token
+ * @property string                                                      $deleted_at
+ * @property \Carbon\Carbon                                              $created_at
+ * @property \Carbon\Carbon                                              $updated_at
  * @method static \Illuminate\Database\Query\Builder|\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\User whereUsername($value)
  * @method static \Illuminate\Database\Query\Builder|\User whereEmail($value)
