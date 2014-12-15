@@ -88,10 +88,8 @@
                     </div>
                     <div class="col-sm-3">
                         {{ Form::submit('Save', array(
-                            'id' => 'hours_description',
+                            'id' => 'hours_save',
                             'class' => 'btn btn-success btn-block',
-                            'required' => true,
-                            'rows' => 3,
                         ) )}}
                     </div>
                 </div>
@@ -141,7 +139,11 @@
                             ) ); }}
                         </li>
                         <li>
-                            <button type="button" class="btn btn-info btn-sm" disabled>Apply</button>
+                            {{ Form::button('Search', array(
+                                'id' => 'hours_search',
+                                'class' => 'btn btn-info btn-sm',
+                                'disabled' => 'disabled'
+                            ) )}}
                         </li>
                     </ul>
                 </div>
