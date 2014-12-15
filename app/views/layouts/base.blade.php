@@ -17,8 +17,8 @@
 
         <title>Track Your Time</title>
 
-        {{ HTML::style('packages/bootstrap/css/bootstrap-flat.min.css') }}
-        {{ HTML::style('packages/bootstrap/css/bootstrap-datetimepicker.min.css') }}
+        {{ HTML::style('bower/bootstrap-flat/index.css') }}
+        {{ HTML::style('bower/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}
         {{ HTML::style('css/styles.css')}}
     </head>
 
@@ -34,10 +34,10 @@
 
         @yield('footer')
 
-        <script src="/js/jquery-1.11.1.min.js"></script>
-        <script src="/packages/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/packages/bootstrap/js/moment.js"></script>
-        <script src="/packages/bootstrap/js/bootstrap-datetimepicker.js"></script>
-        <script src="/js/main.js"></script>
+        {{ HTML::script('bower/jquery/dist/jquery.min.js') }}
+        {{ HTML::script('bower/bootstrap/dist/js/bootstrap.min.js') }}
+        {{ HTML::script('bower/moment/min/moment.min.js') }}
+        {{ HTML::script('bower/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}
+        {{ HTML::script('js/main.js') }}
     </body>
 </html>

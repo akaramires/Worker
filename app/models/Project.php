@@ -1,37 +1,44 @@
 <?php
 
-/**
- * Created by Elmar <aka Ramires> Abdurayimov <e.abdurayimov@gmail.com>
- *
- * @copyright (C)Copyright 2014 eatech.org
- * Date: 12/13/14
- * Time: 3:11 PM
- */
+    /**
+     * Created by Elmar <aka Ramires> Abdurayimov <e.abdurayimov@gmail.com>
+     *
+     * @copyright (C)Copyright 2014 eatech.org
+     *               Date: 12/13/14
+     *               Time: 3:11 PM
+     */
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+    use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-/**
- * Class Project
- *
- * @property      int                                              $id
- * @property      int                                              $parent_id
- * @property      string                                           $title
- * @property      string                                           $slug
- * @property      string                                           $deleted_at
- * @property      string                                           $created_at
- * @property      string                                           $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Hour[] $hours
- */
-class Project extends Eloquent
-{
-
-    use SoftDeletingTrait;
-
-    protected $table = 'projects';
-
-    public function hours ()
+    /**
+     * Class Project
+     *
+     * @property integer                                               $id
+     * @property integer                                               $parent_id
+     * @property string                                                $title
+     * @property string                                                $slug
+     * @property string                                                $deleted_at
+     * @property \Carbon\Carbon                                        $created_at
+     * @property \Carbon\Carbon                                        $updated_at
+     * @property-read \Illuminate\Database\Eloquent\Collection|\Hour[] $hours
+     * @method static \Illuminate\Database\Query\Builder|\Project whereId($value)
+     * @method static \Illuminate\Database\Query\Builder|\Project whereParentId($value)
+     * @method static \Illuminate\Database\Query\Builder|\Project whereTitle($value)
+     * @method static \Illuminate\Database\Query\Builder|\Project whereSlug($value)
+     * @method static \Illuminate\Database\Query\Builder|\Project whereDeletedAt($value)
+     * @method static \Illuminate\Database\Query\Builder|\Project whereCreatedAt($value)
+     * @method static \Illuminate\Database\Query\Builder|\Project whereUpdatedAt($value)
+     */
+    class Project extends Eloquent
     {
-        return $this->hasMany('Hour');
-    }
 
-}
+        use SoftDeletingTrait;
+
+        protected $table = 'projects';
+
+        public function hours()
+        {
+            return $this->hasMany('Hour');
+        }
+
+    }
