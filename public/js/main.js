@@ -6,47 +6,59 @@
 
     'use strict';
 
-    jQuery(document).ready(function ($) {
-        if ($('select#hours_project').length > 0) {
+    $(document).ready(function ($) {
+        var $formHours = $('#form-add-hours');
 
-            $('select#hours_project').change(function () {
+        if ($formHours.length > 0) {
+
+            var $elToken = $formHours.find('input[name=_token]'),
+                $elDate = $formHours.find('input#hours_date'),
+                $elProject = $formHours.find('select#hours_project'),
+                $elTask = $formHours.find('select#hours_task'),
+                $elCount = $formHours.find('input#hours_count'),
+                $elDescription = $formHours.find('textarea#hours_description');
+
+            $elProject.change(function () {
+                var $this = $(this);
+
                 jQuery.ajax({
                     url       : '/tasks',
                     type      : 'POST',
                     data      : {
-                        option: $(this).val()
+                        option: $this.val()
                     },
                     beforeSend: function () {
-                        $('select#hours_task').prop("disabled", true);
-                        $('select#hours_task option').slice(1).remove();
+                        $elTask.prop("disabled", true);
+                        $elTask.find('option').slice(1).remove();
                     },
                     success   : function (response) {
 
                         $.each(response, function (index, element) {
-                            $('select#hours_task').append('<option value="' + index + '">' + element + '</option>');
+                            $elTask.append('<option value="' + index + '">' + element + '</option>');
                         });
 
-                        $('select#hours_task').prop("disabled", false);
+                        $elTask.prop("disabled", false);
                         if (Object.keys(response).length == 1) {
-                            $('select#hours_task').val(Object.keys(response)[0]);
+                            $elTask.val(Object.keys(response)[0]);
                         }
                     }
                 });
             });
 
-            $('#form-add-hours').on('submit', function () {
+            $formHours.on('submit', function () {
                 var $form = $(this);
+
                 jQuery.ajax({
                     url       : $form.prop('action'),
                     type      : 'POST',
                     dataType  : 'json',
                     data      : {
-                        _token           : $form.find('input[name=_token]').val(),
-                        hours_date       : $form.find('[name=hours_date]').val(),
-                        hours_project    : $form.find('[name=hours_project]').val(),
-                        hours_task       : $form.find('[name=hours_task]').val(),
-                        hours_count      : $form.find('[name=hours_count]').val(),
-                        hours_description: $form.find('[name=hours_description]').val()
+                        _token           : $elToken.val(),
+                        hours_date       : $elDate.val(),
+                        hours_project    : $elProject.val(),
+                        hours_task       : $elTask.val(),
+                        hours_count      : $elCount.val(),
+                        hours_description: $elDescription.val()
                     },
                     beforeSend: function () {
                         $form.find('.form-error').html('');
@@ -54,24 +66,7 @@
                     },
                     success   : function (response) {
                         if (response.success) {
-                            $('.table-hours tbody tr:first-of-type').before('<tr>' +
-                            '<td class="text-center">' + $form.find('[name=hours_date]').val() + '</td>' +
-                            '<td class="text-center">' + $form.find('[name=hours_count]').val() + '</td>' +
-                            '<td class="col-project">' + $form.find('[name=hours_project] option:selected').text() + '</td>' +
-                            '<td class="col-project">' + $form.find('[name=hours_task] option:selected').text() + '</td>' +
-                            '<td>' + $form.find('[name=hours_description]').val() + '</td>' +
-                            '<td class="text-center">' +
-                            '<div class="btn-group">' +
-                            '<button type="button" class="btn btn-warning btn-sm">Edit</button>' +
-                            '<button type="button" class="btn btn-danger btn-sm">Delete</button>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>');
-                            $form.find('[name=hours_date]').val('');
-                            $form.find('[name=hours_count]').val('');
-                            $form.find('[name=hours_project]').val('');
-                            $form.find('[name=hours_task]').val('');
-                            $form.find('[name=hours_description]').val('');
+                            location.reload();
                         } else {
                             if (response.type == 'validation') {
                                 $.each(response.errors, function (key, value) {
@@ -83,7 +78,8 @@
                                         .html(value.join('<br>'));
                                 });
                             } else {
-                                $form.find('.form-error').html(response.msg);
+                                flashError(response.msg);
+                                //$form.find('.form-error').html(response.msg);
                             }
                         }
                     }
@@ -92,7 +88,7 @@
                 return false;
             });
 
-            $('#hours_date').datetimepicker({
+            $elDate.datetimepicker({
                 pickTime: false,
                 maxDate : new Date()
             });
@@ -104,6 +100,46 @@
                 return false;
             }
         });
+
+        $('.alert.alert-success').each(function () {
+            flashSuccess($.trim($(this).html()));
+        });
+
+        $('.alert.alert-danger').each(function () {
+            flashError($.trim($(this).html()));
+        });
+
+        $('.alert.alert-warning').each(function () {
+            flashWarning($.trim($(this).html()));
+        });
     });
 
+    function flash(text, type) {
+        noty({
+            text      : text,
+            type      : type,
+            layout    : 'topRight',
+            theme     : 'relax',
+            maxVisible: 3,
+            timeout   : 3000,
+            animation : {
+                open  : 'animated bounceInRight',
+                close : 'animated bounceOutRight',
+                easing: 'swing',
+                speed : 500
+            }
+        })
+    }
+
+    function flashSuccess(text) {
+        flash(text, 'success');
+    }
+
+    function flashError(text) {
+        flash(text, 'error');
+    }
+
+    function flashWarning(text) {
+        flash(text, 'warning');
+    }
 })(jQuery);
