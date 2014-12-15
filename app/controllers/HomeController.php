@@ -1,14 +1,41 @@
 <?php
 
+
 class HomeController extends BaseController
 {
 
     public function index ()
     {
+
+
+        $hours = Auth::user()->hours();
+
+        if (Input::get('from') != null) {
+            $searchFrom = date('Y-m-d', Input::get('from'));
+        } else {
+            $searchFrom = date('Y-m-01');
+        }
+
+        if (Input::get('to') != null) {
+            $searchTo = date('Y-m-d', Input::get('to'));
+        } else {
+            $searchTo = date('Y-m-t');
+        }
+
+        $hours = $hours->where('date', 'BETWEEN', DB::raw("'$searchFrom' AND '$searchTo'"));
+
+        if (Input::get('project') != null) {
+            $hours = $hours->where('project_id', '=', Input::get('project'));
+        }
+
         if (Request::ajax()) {
         } else {
 
-            $hours = Auth::user()->hours()->orderBy('id', 'desc')->paginate(10);
+            $hours = $hours->orderBy('date', 'desc')->paginate(10);
+//            echo "<pre>";
+//            var_dump(DB::getQueryLog());
+//            echo "</pre>";
+//            die;
 
             foreach ($hours as &$hour) {
                 if ($hour->project->parent_id == 0) {

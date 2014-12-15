@@ -18,6 +18,7 @@
         alert2flash();
         filterDate();
         filterProject();
+        filter();
     });
 
     function addHours() {
@@ -44,6 +45,10 @@
                     beforeSend: function () {
                         $elTask.prop("disabled", true);
                         $elTask.find('option').slice(1).remove();
+
+                        if (!$this.val()) {
+                            return false;
+                        }
                     },
                     success   : function (response) {
 
@@ -147,7 +152,7 @@
                     },
                     beforeSend: function () {
                         filterTask.prop("disabled", true);
-                        filterTask.find('option').slice(1).remove();
+                        filterTask.find('option').remove();
                     },
                     success   : function (response) {
 
@@ -156,12 +161,19 @@
                         });
 
                         filterTask.prop("disabled", false);
-                        if (Object.keys(response).length == 1) {
-                            filterTask.val(Object.keys(response)[0]);
+
+                        var filterTaskID = $('[name=filterTaskID]').val();
+                        if (filterTaskID) {
+                            filterTask.val(filterTaskID);
                         }
                     }
                 });
             });
+        }
+
+        var filterProjectID = $('[name=filterProjectID]').val();
+        if (filterProjectID) {
+            $("#filter-project").val(filterProjectID).trigger('change');
         }
     }
 
@@ -206,6 +218,38 @@
 
     function flashWarning(text) {
         flash(text, 'warning');
+    }
+
+    function filter() {
+        var $submitBtn = $('#hours_search');
+
+        if ($submitBtn.length > 0) {
+            $submitBtn.on('click', function () {
+                var params = {};
+
+                var filterDateFrom = $('#filter-date-from').val();
+                if (filterDateFrom) {
+                    params.from = (new Date(filterDateFrom).getTime() / 1000);
+                }
+
+                var filterDateTo = $('#filter-date-to').val();
+                if (filterDateTo) {
+                    params.to = (new Date(filterDateTo).getTime() / 1000);
+                }
+
+                var filterProject = $('#filter-project').val();
+                if (filterProject) {
+                    params.project = filterProject;
+                }
+
+                var filterTask = $('#filter-task').val();
+                if (filterTask) {
+                    params.task = filterTask;
+                }
+
+                window.location.href = '/?' + $.param(params);
+            });
+        }
     }
 })
 (jQuery);

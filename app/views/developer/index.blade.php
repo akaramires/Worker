@@ -103,50 +103,58 @@
     <div class="panel panel-default panel-hours">
         <div class="panel-body">
             <div class="row">
-                <div class="col-sm-12">
-                    <ul class="list-inline filter-row">
-                        <li>
-                            <div class="input-group input-group-sm">
-                                {{ Form::text( 'filter-date-from', '', array(
-                                    'id' => 'filter-date-from',
-                                    'class' => 'form-control date-input',
-                                    'required' => true,
-                                    'data-date-format' => 'YYYY-MM-DD',
-                                    'placeholder' => 'Date from'
-                                ) ) }}
-                                {{ Form::text( 'filter-date-to', '', array(
-                                    'id' => 'filter-date-to',
-                                    'class' => 'form-control date-input',
-                                    'required' => true,
-                                    'data-date-format' => 'YYYY-MM-DD',
-                                    'placeholder' => 'Date to'
-                                ) ) }}
-                            </div>
-                        </li>
-                        <li>
-                            {{ Form::select('filter-project', array(null=>'Please Select') + $projects, '', array(
-                                'id' => 'filter-project',
-                                'class' => 'form-control input-sm',
+                {{ Form::open( array(
+                    'class' => 'filter-row',
+                    'method' => 'GET',
+                    'id' => 'form-filter-hours',
+                ) ) }}
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm">
+                            {{ Form::text( 'filter[from]', Input::get('from') ? date('Y-m-d', Input::get('from')) : '', array(
+                                'id' => 'filter-date-from',
+                                'class' => 'form-control date-input',
                                 'required' => true,
-                            ) ); }}
-                        </li>
-                        <li>
-                            {{ Form::select('filter-task', array(null=>'Please Select'), '', array(
-                                'id' => 'filter-task',
-                                'class' => 'form-control input-sm',
+                                'data-date-format' => 'YYYY-MM-DD',
+                                'placeholder' => 'Date from'
+                            ) ) }}
+                            {{ Form::text( 'filter[to]', Input::get('to') ? date('Y-m-d', Input::get('to')) : '', array(
+                                'id' => 'filter-date-to',
+                                'class' => 'form-control date-input',
                                 'required' => true,
-                                'disabled' => 'disabled'
-                            ) ); }}
-                        </li>
-                        <li>
-                            {{ Form::button('Search', array(
-                                'id' => 'hours_search',
-                                'class' => 'btn btn-info btn-sm',
-                                'disabled' => 'disabled'
-                            ) )}}
-                        </li>
-                    </ul>
-                </div>
+                                'data-date-format' => 'YYYY-MM-DD',
+                                'placeholder' => 'Date to'
+                            ) ) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="list-inline">
+                            <li>
+                                {{ Form::hidden('filterProjectID', Input::get('project') ? Input::get('project') : '')}}
+                                {{ Form::select('filter[project]', array(null=>'Please Select') + $projects, '', array(
+                                    'id' => 'filter-project',
+                                    'class' => 'form-control input-sm',
+                                    'required' => true,
+                                ) ); }}
+                            </li>
+                            <li>
+                                {{ Form::hidden('filterTaskID', Input::get('task') ? Input::get('task') : '')}}
+                                {{ Form::select('filter[task]', array(), '', array(
+                                    'id' => 'filter-task',
+                                    'class' => 'form-control input-sm',
+                                    'required' => true,
+                                    'disabled' => 'disabled'
+                                ) ); }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        {{ Form::button('Search', array(
+                            'id' => 'hours_search',
+                            'class' => 'btn btn-info btn-sm',
+                        ) )}}
+                        {{ HTML::link('/', 'Clear', array('class' => 'btn btn-default btn-sm') ) }}
+                    </div>
+                {{ Form::close() }}
             </div>
         </div>
 

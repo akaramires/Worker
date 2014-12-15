@@ -192,6 +192,7 @@ return array(
         'View'              => 'Illuminate\Support\Facades\View',
 
         'Slug'              => 'Somepony\L4CyrillicSlug\Facades\Slug',
+        'Carbon'            => 'Carbon\Carbon',
     ),
 
 );

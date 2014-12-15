@@ -7,6 +7,10 @@ Route::get('logout', 'UserController@logout');
 Route::group(array('before' => 'auth'), function () {
     Route::post('/tasks', 'HomeController@tasks');
     Route::delete('/{id}', 'HomeController@destroy');
+    Route::any('/{date_from}/{date_to}/{task_id}', 'HomeController@index')
+        ->where('date_from', '[0-9]+')
+        ->where('date_to', '[0-9]+')
+        ->where('task_id', '[0-9]+');
     Route::resource('/', 'HomeController');
 });
 Route::group(array('before' => 'permission:admin'), function () {

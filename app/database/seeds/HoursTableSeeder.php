@@ -19,7 +19,7 @@ class HoursTableSeeder extends Seeder
             'project_id'  => 17,
             'description' => $faker->text,
             'count'       => 8,
-            'date'        => date('Y-m-d'),
+            'date'        => '2014-12-14',
         ));
 
         Hour::create(array(
@@ -27,7 +27,7 @@ class HoursTableSeeder extends Seeder
             'project_id'  => 54,
             'description' => $faker->text,
             'count'       => 8,
-            'date'        => date('Y-m-d'),
+            'date'        => '2014-12-13',
         ));
 
         Hour::create(array(
@@ -35,7 +35,7 @@ class HoursTableSeeder extends Seeder
             'project_id'  => 56,
             'description' => $faker->text,
             'count'       => 8,
-            'date'        => date('Y-m-d'),
+            'date'        => '2014-12-12',
         ));
 
         Hour::create(array(
@@ -43,7 +43,7 @@ class HoursTableSeeder extends Seeder
             'project_id'  => 77,
             'description' => $faker->text,
             'count'       => 8,
-            'date'        => date('Y-m-d'),
+            'date'        => '2014-12-11',
         ));
     }
 }

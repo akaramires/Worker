@@ -13,7 +13,8 @@
         "somepony/l4-cyrillic-slug": "dev-master",
         "fzaninotto/faker": "1.2.*@dev",
         "barryvdh/laravel-ide-helper": "*",
-        "doctrine/dbal": "~2.3"
+        "doctrine/dbal": "~2.3",
+        "nesbot/Carbon": "*"
     },
     "autoload": {
         "classmap": [
