@@ -180,6 +180,7 @@
                             <button data-hours-id="{{$hour->id}}" type="button" class="btn btn-warning btn-sm btn-edit-hours pull-left">Edit</button>
                             {{ Form::open(array('url' => '/' . $hour->id, 'class' => 'form-delete-hours')) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
+                                {{ Form::hidden('redirect', $_SERVER['REQUEST_URI']) }}
                                 {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-sm pull-right')) }}
                             {{ Form::close() }}
                         </td>

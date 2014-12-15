@@ -107,7 +107,7 @@ class HomeController extends BaseController
 
         $hours->delete();
 
-        return Redirect::to('/')->with('successMsg', 'The entity was deleted successfully.');
+        return Redirect::to(Input::get('redirect'))->with('successMsg', 'The entity was deleted successfully.');
     }
 
     public function tasks ()
