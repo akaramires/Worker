@@ -18,24 +18,22 @@
         <div class="col-sm-6">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <span class="badge">{{ DateHelper::workDays(); }}</span>
-                    Total days:
+                    <a href="">Add User</a>
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{ DateHelper::workHours(); }}</span>
-                    Total hours:
+                    <a href="">Add Project</a>
                 </li>
             </ul>
         </div>
         <div class="col-sm-6">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <span class="badge"> </span>
-                    Worked hours:
+                    <span class="badge">{{ DateHelper::workDays(); }}</span>
+                    Total days:
                 </li>
                 <li class="list-group-item">
-                    <span class="badge"> </span>
-                    Unreported hours:
+                    <span class="badge">{{ DateHelper::workHours(); }}</span>
+                    Total hours:
                 </li>
             </ul>
         </div>
@@ -132,9 +130,11 @@
                 </tbody>
             </table>
 
-            <div class="text-center panel-body">
-                {{ $hours->links() }}
-            </div>
+            @if($hours->getLastPage() > 1)
+                <div class="text-center panel-body">
+                    {{ $hours->links() }}
+                </div>
+            @endif
         @endif
 
     </div>

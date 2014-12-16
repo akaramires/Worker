@@ -29,6 +29,9 @@ body > .container {
 .col-hours {
   width: 65px;
 }
+.col-project {
+  min-width: 150px;
+}
 .col-operations {
   width: 125px !important;
   min-width: 120px !important;

@@ -243,9 +243,11 @@
             </tbody>
         </table>
 
-        <div class="text-center panel-body">
-            {{ $hours->links() }}
-        </div>
+        @if($hours->getLastPage() > 1)
+            <div class="text-center panel-body">
+                {{ $hours->links() }}
+            </div>
+        @endif
 
     </div>
 @stop
