@@ -54,7 +54,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function permissions ()
     {
-        return $this->belongsToMany('Permission')->withTimestamps();
+        return $this->belongsToMany('Permission', 'permission_user');
     }
 
     public function hasPermissions ($permissions, $requireAll = false)

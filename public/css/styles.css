@@ -69,5 +69,5 @@ body > .container {
 }
 #filter-project,
 #filter-task {
-  min-width: 200px;
+  width: 200px;
 }

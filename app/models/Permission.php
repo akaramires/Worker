@@ -41,7 +41,7 @@
          */
         public function users()
         {
-            return $this->hasMany('User')->withTimestamps();
+            return $this->hasMany('User');
         }
 
     }
