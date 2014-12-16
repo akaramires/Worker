@@ -7,8 +7,8 @@
         public function index()
         {
 
-            /** @var \Hour $userHours */
-            $userHours = Auth::user()->hours();
+            /** @var \Hour $hours */
+            $hours = Auth::user()->hours();
 
             if (Input::get('from') != null) {
                 $searchFrom = date('Y-m-d', Input::get('from'));
@@ -22,7 +22,7 @@
                 $searchTo = date('Y-m-t');
             }
 
-            $hours = $userHours->where('date', 'BETWEEN', DB::raw("'$searchFrom' AND '$searchTo'"));
+            $hours = $hours->where('date', 'BETWEEN', DB::raw("'$searchFrom' AND '$searchTo'"));
 
             if (Input::get('project') != null) {
                 $hours = $hours->where('project_id', '=', Input::get('project'));
@@ -44,7 +44,8 @@
 
                 $projects = Project::where('parent_id', '=', 0)->orderBy('title')->lists('title', 'id');
 
-                $hoursInCurMonth = $userHours->where('date', 'BETWEEN', DB::raw("'" . date('Y-m-01') . "' AND '" . date('Y-m-t') . "'"))->sum('count');
+                $hoursInCurMonth = Auth::user()->hours()->where('date', 'BETWEEN', DB::raw("'" . date('Y-m-01') . "' AND '" . date('Y-m-t') . "'"))->sum('count');
+
                 return View::make('developer/hours')
                     ->with('page_title', 'Your hours')
                     ->with('projects', $projects)

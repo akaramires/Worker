@@ -9,102 +9,117 @@
 
 @section('content')
     <div class="row">
-        {{ Form::open( array(
-            'class' => 'form-horizontal',
-            'method' => 'post',
-            'id' => 'form-add-hours'
-            ) ) }}
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label class="col-xs-12 col-md-2 control-label">Date</label>
-                    <div class="col-xs-4 col-md-4">
-                        {{ Form::text( 'hours_date', '', array(
-                            'id' => 'hours_date',
-                            'class' => 'form-control',
-                            'required' => true,
-                            'data-date-format' => 'YYYY-MM-DD',
-                        ) ) }}
-                        <p class="help-block text-right"></p>
-                    </div>
-                    <div class="col-xs-4 col-md-4">
-                        <button class="btn btn-success" type="button" onclick="$('#hours_date').val('<?php echo date('Y-m-d'); ?>')">Today</button>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Project</label>
-                    <div class="col-sm-10">
-                        {{ Form::select('hours_project', array(null=>'Please Select') + $projects, '', array(
-                            'id' => 'hours_project',
-                            'class' => 'form-control',
-                            'required' => true,
-                        ) ); }}
-                        <p class="help-block text-right"></p>
-                    </div>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title text-right">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add hours</a>
+                    </h4>
                 </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        {{ Form::open( array(
+                            'class' => 'form-horizontal',
+                            'method' => 'post',
+                            'id' => 'form-add-hours'
+                            ) ) }}
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-2 control-label">Date</label>
+                                    <div class="col-xs-4 col-md-4">
+                                        {{ Form::text( 'hours_date', '', array(
+                                            'id' => 'hours_date',
+                                            'class' => 'form-control',
+                                            'required' => true,
+                                            'data-date-format' => 'YYYY-MM-DD',
+                                        ) ) }}
+                                        <p class="help-block text-right"></p>
+                                    </div>
+                                    <div class="col-xs-4 col-md-4">
+                                        <button class="btn btn-success" type="button" onclick="$('#hours_date').val('<?php echo date('Y-m-d'); ?>')">Today</button>
+                                    </div>
+                                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Task</label>
-                    <div class="col-sm-10">
-                        {{ Form::select('hours_task', array(null=>'Please Select'), '', array(
-                            'id' => 'hours_task',
-                            'class' => 'form-control',
-                            'required' => true,
-                            'disabled' => 'disabled'
-                        ) ); }}
-                        <p class="help-block text-right"></p>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Project</label>
+                                    <div class="col-sm-10">
+                                        {{ Form::select('hours_project', array(null=>'Please Select') + $projects, '', array(
+                                            'id' => 'hours_project',
+                                            'class' => 'form-control',
+                                            'required' => true,
+                                        ) ); }}
+                                        <p class="help-block text-right"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Task</label>
+                                    <div class="col-sm-10">
+                                        {{ Form::select('hours_task', array(null=>'Please Select'), '', array(
+                                            'id' => 'hours_task',
+                                            'class' => 'form-control',
+                                            'required' => true,
+                                            'disabled' => 'disabled'
+                                        ) ); }}
+                                        <p class="help-block text-right"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Hours</label>
+                                    <div class="col-sm-10">
+                                        {{ Form::number( 'hours_count', '', array(
+                                            'id' => 'hours_count',
+                                            'class' => 'form-control',
+                                            'required' => true,
+                                        ) ) }}
+                                        <p class="help-block text-right"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Description</label>
+                                    <div class="col-sm-10">
+                                        {{ Form::textarea( 'hours_description', '', array(
+                                            'id' => 'hours_description',
+                                            'class' => 'form-control',
+                                            'required' => true,
+                                            'rows' => 3,
+                                        ) ) }}
+                                        <p class="help-block text-right"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <p class="text-right text-danger form-error"></p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        {{ Form::submit('Save', array(
+                                            'id' => 'hours_save',
+                                            'class' => 'btn btn-success btn-block',
+                                        ) )}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        {{ Form::close() }}
+
+                        <div class="hr"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Hours</label>
-                    <div class="col-sm-10">
-                        {{ Form::number( 'hours_count', '', array(
-                            'id' => 'hours_count',
-                            'class' => 'form-control',
-                            'required' => true,
-                        ) ) }}
-                        <p class="help-block text-right"></p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
-                        {{ Form::textarea( 'hours_description', '', array(
-                            'id' => 'hours_description',
-                            'class' => 'form-control',
-                            'required' => true,
-                            'rows' => 3,
-                        ) ) }}
-                        <p class="help-block text-right"></p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <p class="text-right text-danger form-error"></p>
-                    </div>
-                    <div class="col-sm-3">
-                        {{ Form::submit('Save', array(
-                            'id' => 'hours_save',
-                            'class' => 'btn btn-success btn-block',
-                        ) )}}
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        {{ Form::close() }}
+        </div>
     </div>
-
-    <div class="hr"></div>
 
     <div class="row">
         <div class="col-sm-12 text-center">
             <h4>{{date('F')}}</h4>
         </div>
     </div>
+
     <div class="row">
         <div class="col-sm-6">
             <ul class="list-group">

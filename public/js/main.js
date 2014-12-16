@@ -144,6 +144,8 @@
     }
 
     function filterProject() {
+        var pageLoaded = true;
+
         var filterProject = $('#filter-project');
         var filterTask = $('#filter-task');
 
@@ -169,9 +171,15 @@
 
                         filterTask.prop("disabled", false);
 
-                        var filterTaskID = $('[name=filterTaskID]').val();
-                        if (filterTaskID) {
-                            filterTask.val(filterTaskID);
+                        if (pageLoaded) {
+                            var filterTaskID = $('[name=filterTaskID]').val();
+                            if (filterTaskID) {
+                                filterTask.val(filterTaskID);
+                            }
+
+                            pageLoaded = false;
+                        } else {
+                            filterTask.val($(filterTask.find('option').get(0)).val())
                         }
                     }
                 });
@@ -254,7 +262,9 @@
                     params.task = filterTask;
                 }
 
-                window.location.href = '/?' + $.param(params);
+                if ($.param(params).length > 0) {
+                    window.location.href = '/?' + $.param(params);
+                }
             });
         }
     }
