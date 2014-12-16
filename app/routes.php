@@ -6,7 +6,7 @@
     Route::get('reset', 'UserController@reset');
     Route::post('reset', 'UserController@resetProcess');
 
-    Route::group(array('before' => 'permission:developer'), function () {
+    Route::group(array('before' => 'role:developer'), function () {
         Route::post('/tasks', 'HomeController@tasks');
         Route::delete('/{id}', 'HomeController@destroy');
         Route::any('/{date_from}/{date_to}/{task_id}', 'HomeController@index')
@@ -16,10 +16,10 @@
         Route::resource('/', 'HomeController');
     });
 
-    Route::group(array('before' => 'permission:admin'), function () {
+    Route::group(array('before' => 'role:admin'), function () {
         Route::resource('admin', 'AdminController');
     });
 
-    Route::group(array('before' => 'permission:manager'), function () {
+    Route::group(array('before' => 'role:manager'), function () {
         Route::resource('reports', 'ReportController');
     });

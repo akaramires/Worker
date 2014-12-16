@@ -36,7 +36,7 @@
 
         protected $table = 'projects';
 
-        public function hours()
+        public function hours ()
         {
             return $this->hasMany('Hour');
         }

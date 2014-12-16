@@ -1,103 +1,72 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+    use Illuminate\Auth\UserTrait;
+    use Illuminate\Auth\UserInterface;
+    use Illuminate\Auth\Reminders\RemindableTrait;
+    use Illuminate\Auth\Reminders\RemindableInterface;
+    use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-/**
- * User
- *
- * @property-read \Illuminate\Database\Eloquent\Collection|\Permission[] $permissions
- * @property-read \Illuminate\Database\Eloquent\Collection|\Hour[]       $hours
- * @property integer                                                     $id
- * @property string                                                      $username
- * @property string                                                      $email
- * @property string                                                      $password
- * @property string                                                      $first_name
- * @property string                                                      $last_name
- * @property boolean                                                     $active
- * @property string                                                      $remember_token
- * @property string                                                      $deleted_at
- * @property \Carbon\Carbon                                              $created_at
- * @property \Carbon\Carbon                                              $updated_at
- * @method static \Illuminate\Database\Query\Builder|\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereUsername($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereFirstName($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereLastName($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereActive($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\User whereUpdatedAt($value)
- */
-class User extends Eloquent implements UserInterface, RemindableInterface
-{
-
-    use UserTrait, RemindableTrait, SoftDeletingTrait;
-
-    protected $table = 'users';
-
-    protected $hidden = array('password', 'remember_token');
-
-    public static $rules = array(
-        'first_name'            => 'required|alpha|min:3',
-        'last_name'             => 'required|alpha|min:1',
-        'username'              => 'required|unique:users',
-        'email'                 => 'required|email|unique:users',
-        'password'              => 'required|alpha_num|between:6,12|confirmed',
-        'password_confirmation' => 'required|alpha_num|between:6,12'
-    );
-
-    public function permissions ()
+    /**
+     * User
+     *
+     * @property integer                                               $id
+     * @property string                                                $username
+     * @property string                                                $email
+     * @property string                                                $password
+     * @property string                                                $first_name
+     * @property string                                                $last_name
+     * @property boolean                                               $active
+     * @property integer                                               $role_id
+     * @property string                                                $remember_token
+     * @property string                                                $deleted_at
+     * @property \Carbon\Carbon                                        $created_at
+     * @property \Carbon\Carbon                                        $updated_at
+     * @property-read \Role                                            $role
+     * @property-read \Illuminate\Database\Eloquent\Collection|\Hour[] $hours
+     * @method static \Illuminate\Database\Query\Builder|\User whereId($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereUsername($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereEmail($value)
+     * @method static \Illuminate\Database\Query\Builder|\User wherePassword($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereFirstName($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereLastName($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereActive($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereRoleId($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereRememberToken($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereDeletedAt($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereCreatedAt($value)
+     * @method static \Illuminate\Database\Query\Builder|\User whereUpdatedAt($value)
+     */
+    class User extends Eloquent implements UserInterface, RemindableInterface
     {
-        return $this->belongsToMany('Permission', 'permission_user');
-    }
 
-    public function hasPermissions ($permissions, $requireAll = false)
-    {
-        // Fetch all of the users permission slugs.
-        $userPermissions = array_fetch($this->permissions->toArray(), 'slug');
+        use UserTrait, RemindableTrait, SoftDeletingTrait;
 
-        // Create an empty array to store the required permissions that the user has.
-        $hasPermissions = [];
+        protected $table = 'users';
 
-        // Loop through all of the required permissions.
-        foreach ((array)$permissions as $permission) {
+        protected $hidden = array('password', 'remember_token');
 
-            // Check if the required permission is in the userPermissions array.
-            if (in_array($permission, $userPermissions)) {
+        public static $rules = array(
+            'first_name'            => 'required|alpha|min:3',
+            'last_name'             => 'required|alpha|min:1',
+            'username'              => 'required|unique:users',
+            'email'                 => 'required|email|unique:users',
+            'password'              => 'required|alpha_num|between:6,12|confirmed',
+            'password_confirmation' => 'required|alpha_num|between:6,12'
+        );
 
-                // Add the permission to the array of required permissions that the user has.
-                $hasPermissions[] = $permission;
-            }
+        public function role ()
+        {
+            return $this->belongsTo('Role', 'role_id');
         }
 
-        // If all permissions are required, check that the user has them all.
-        if ($requireAll === true) {
-            return $hasPermissions == (array)$permissions;
+        public function hours ()
+        {
+            return $this->hasMany('Hour');
         }
 
-        // If all are not required, check that the user has at least 1.
-        return !empty($hasPermissions);
-    }
-
-    public function hours ()
-    {
-        return $this->hasMany('Hour');
-    }
-
-    public function redirectToOwnPage ()
-    {
-        $userPermissions = array_fetch($this->permissions->toArray(), 'slug');
-
-        if (sizeof($userPermissions) > 0) {
-            $permission = reset($userPermissions);
-
-            switch ($permission) {
+        public function redirectToOwnPage ()
+        {
+            switch ($this->role->slug) {
                 case 'developer':
                     $url = '/';
                     break;
@@ -107,13 +76,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface
                 case 'admin':
                     $url = '/admin';
                     break;
+                default:
+                    $url = 'login';
+                    break;
             }
 
             return Redirect::to($url);
-//            return Redirect::to($url)->with('errorMsg', 'You don\'t have permission to access the requested page');
-        } else {
-
-            return Redirect::to('login');
         }
     }
-}
