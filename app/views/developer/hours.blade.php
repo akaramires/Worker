@@ -100,6 +100,40 @@
 
     <div class="hr"></div>
 
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h4>{{date('F')}}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">{{ DateHelper::workDays(); }}</span>
+                    Total days:
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{ DateHelper::workHours(); }}</span>
+                    Total hours:
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge"> {{ $hours_worked; }}</span>
+                    Worked hours:
+                </li>
+                <li class="list-group-item">
+                    <span class="badge"> {{ $hours_unreported; }}</span>
+                    Unreported hours:
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="hr"></div>
+
     <div class="panel panel-default panel-hours">
         <div class="panel-body">
             <div class="row">

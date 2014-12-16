@@ -12,7 +12,7 @@ class UserController extends BaseController
     {
         Auth::logout();
 
-        return View::make('login');
+        return View::make('user/login');
     }
 
     public function process ()

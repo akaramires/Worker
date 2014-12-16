@@ -5,7 +5,7 @@
     Time: 5:29 PM
 --}}
 
-@extends('layouts.main')
+@extends('...layouts.main')
 
 @section('content')
     {{ Form::open(array('url' => 'login', 'class' => 'form-horizontal', 'role' => 'form')) }}
