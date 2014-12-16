@@ -51,6 +51,8 @@
                     'method' => 'GET',
                     'id' => 'form-filter-hours',
                 ) ) }}
+                    {{ Form::hidden('projectDDownId', Input::get('project') ? Input::get('project') : '')}}
+                    {{ Form::hidden('taskDDownId', Input::get('task') ? Input::get('task') : '')}}
                     <div class="col-sm-3">
                         <div class="input-group input-group-sm">
                             {{ Form::text( 'filter[from]', Input::get('from') ? date('Y-m-d', Input::get('from')) : '', array(
@@ -72,7 +74,6 @@
                     <div class="col-sm-5">
                         <ul class="list-inline">
                             <li>
-                                {{ Form::hidden('filterProjectID', Input::get('project') ? Input::get('project') : '')}}
                                 {{ Form::select('filter[project]', array(null=>'Please Select') + $projectsList, '', array(
                                     'id' => 'filter-project',
                                     'class' => 'form-control input-sm project-dropdown',
@@ -81,7 +82,6 @@
                                 ) ); }}
                             </li>
                             <li>
-                                {{ Form::hidden('filterTaskID', Input::get('task') ? Input::get('task') : '')}}
                                 {{ Form::select('filter[task]', array(), '', array(
                                     'id' => 'filter-task',
                                     'class' => 'form-control input-sm task-dropdown-' . $taskSelect,
@@ -92,8 +92,7 @@
                         </ul>
                     </div>
                     <div class="col-sm-2 text-right">
-                        {{ Form::hidden('filterDeveloperID', Input::get('dev') ? Input::get('dev') : '')}}
-                        {{ Form::select('filter[dev]', array(null=>'Please Select') + $usersList, '', array(
+                        {{ Form::select('filter[dev]', array(null=>'Please Select') + $usersList, Input::get('dev') ? Input::get('dev') : '', array(
                             'id' => 'filter-dev',
                             'class' => 'form-control input-sm',
                             'required' => true,
@@ -118,7 +117,6 @@
                         <th class="text-center col-hours">Hours</th>
                         <th class="text-center col-project" colspan="2">Project</th>
                         <th>Description</th>
-                        <th class="col-operations"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -129,14 +127,6 @@
                             <td class="col-project">{{$hour->project_parent}}</td>
                             <td class="col-project">{{$hour->project_child}}</td>
                             <td>{{ $hour->description }}</td>
-                            <td class="text-center">
-                                <button data-hours-id="{{$hour->id}}" type="button" class="btn btn-warning btn-sm btn-edit-hours pull-left">Edit</button>
-                                {{ Form::open(array('url' => '/' . $hour->id, 'class' => 'form-delete-hours')) }}
-                                    {{ Form::hidden('_method', 'DELETE') }}
-                                    {{ Form::hidden('redirect', $_SERVER['REQUEST_URI']) }}
-                                    {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-sm pull-right')) }}
-                                {{ Form::close() }}
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -27,6 +27,11 @@
     }
 
     function initProjectSelects() {
+        var pageLoaded = true;
+
+        var $projectID = $('[name=projectDDownId]');
+        var $taskID = $('[name=taskDDownId]');
+
         var $ddProject = $('.project-dropdown');
 
         if ($ddProject.length > 0) {
@@ -55,10 +60,21 @@
                             });
 
                             $ddTask.prop("disabled", false);
+
+                            if (pageLoaded) {
+                                if ($taskID.val()) {
+                                    $ddTask.val($taskID.val());
+                                }
+
+                                pageLoaded = false;
+                            }
                         }
                     });
                 });
+            }
 
+            if ($projectID.val()) {
+                $ddProject.val($projectID.val()).trigger('change');
             }
         }
     }
