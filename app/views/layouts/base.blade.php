@@ -41,5 +41,9 @@
         {{ HTML::script('bower/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}
         {{ HTML::script('bower/noty/js/noty/packaged/jquery.noty.packaged.min.js') }}
         {{ HTML::script('js/main.js') }}
+        @if(Auth::check())
+            {{ HTML::script('js/' . Auth::user()->role->slug . '.js') }}
+        @endif
+        @yield('scripts')
     </body>
 </html>

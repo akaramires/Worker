@@ -6,8 +6,11 @@
     Route::get('reset', 'UserController@reset');
     Route::post('reset', 'UserController@resetProcess');
 
-    Route::group(array('before' => 'role:developer'), function () {
+    Route::group(array('before' => 'auth'), function () {
         Route::post('/tasks', 'HomeController@tasks');
+    });
+
+    Route::group(array('before' => 'role:developer'), function () {
         Route::delete('/{id}', 'HomeController@destroy');
         Route::any('/{date_from}/{date_to}/{task_id}', 'HomeController@index')
             ->where('date_from', '[0-9]+')

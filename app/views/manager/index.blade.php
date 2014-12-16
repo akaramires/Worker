@@ -75,7 +75,8 @@
                                 {{ Form::hidden('filterProjectID', Input::get('project') ? Input::get('project') : '')}}
                                 {{ Form::select('filter[project]', array(null=>'Please Select') + $projectsList, '', array(
                                     'id' => 'filter-project',
-                                    'class' => 'form-control input-sm',
+                                    'class' => 'form-control input-sm project-dropdown',
+                                    'data-destination' => ($taskSelect = uniqid()),
                                     'required' => true,
                                 ) ); }}
                             </li>
@@ -83,7 +84,7 @@
                                 {{ Form::hidden('filterTaskID', Input::get('task') ? Input::get('task') : '')}}
                                 {{ Form::select('filter[task]', array(), '', array(
                                     'id' => 'filter-task',
-                                    'class' => 'form-control input-sm',
+                                    'class' => 'form-control input-sm task-dropdown-' . $taskSelect,
                                     'required' => true,
                                     'disabled' => 'disabled'
                                 ) ); }}
@@ -100,7 +101,7 @@
                     </div>
                     <div class="col-sm-2 text-right">
                         {{ Form::button('Search', array(
-                            'id' => 'hours_search',
+                            'id' => 'filter_run',
                             'class' => 'btn btn-info btn-sm',
                         ) )}}
                         {{ HTML::link('/', 'Clear', array('class' => 'btn btn-default btn-sm') ) }}

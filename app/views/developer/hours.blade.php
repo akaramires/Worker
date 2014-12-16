@@ -50,7 +50,8 @@
                                     <div class="col-sm-10">
                                         {{ Form::select('hours_project', array(null=>'Please Select') + $projects, '', array(
                                             'id' => 'hours_project',
-                                            'class' => 'form-control',
+                                            'class' => 'form-control project-dropdown',
+                                            'data-destination' => ($taskSelect = uniqid()),
                                             'required' => true,
                                         ) ); }}
                                         <p class="help-block text-right"></p>
@@ -62,7 +63,7 @@
                                     <div class="col-sm-10">
                                         {{ Form::select('hours_task', array(null=>'Please Select'), '', array(
                                             'id' => 'hours_task',
-                                            'class' => 'form-control',
+                                            'class' => 'form-control task-dropdown-' . $taskSelect,
                                             'required' => true,
                                             'disabled' => 'disabled'
                                         ) ); }}
@@ -202,7 +203,7 @@
                     </div>
                     <div class="col-sm-2 text-right">
                         {{ Form::button('Search', array(
-                            'id' => 'hours_search',
+                            'id' => 'filter_run',
                             'class' => 'btn btn-info btn-sm',
                         ) )}}
                         {{ HTML::link('/', 'Clear', array('class' => 'btn btn-default btn-sm') ) }}
