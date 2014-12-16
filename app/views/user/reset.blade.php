@@ -38,7 +38,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-2">
-                {{ Form::submit('Reset', array('class' => 'btn btn-warning btn-block')) }}
+                {{ Form::submit('Change', array('class' => 'btn btn-warning btn-block')) }}
             </div>
         </div>
 

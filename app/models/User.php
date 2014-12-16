@@ -109,7 +109,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface
                     break;
             }
 
-            return Redirect::to($url)->with('errorMsg', 'You don\'t have permission to access the requested page');
+            return Redirect::to($url);
+//            return Redirect::to($url)->with('errorMsg', 'You don\'t have permission to access the requested page');
         } else {
 
             return Redirect::to('login');

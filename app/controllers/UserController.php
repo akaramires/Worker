@@ -36,7 +36,7 @@ class UserController extends BaseController
 
     public function reset ()
     {
-        return View::make("user/reset")->with('page_title', 'Password reset');
+        return View::make("user/reset")->with('page_title', 'Password change');
     }
 
     public function resetProcess ()
