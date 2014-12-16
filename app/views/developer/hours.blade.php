@@ -13,9 +13,13 @@
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title text-right">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add hours</a>
-                    </h4>
+                    {{--<h4 class="panel-title text-right">--}}
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4 class="panel-title text-right">
+                         <small><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></small> Add hours
+                         </h4>
+                        </a>
+                    {{--</h4>--}}
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">

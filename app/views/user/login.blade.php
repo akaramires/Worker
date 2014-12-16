@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
-                {{ Form::submit('Login.', array('class' => 'btn btn-default')) }}
+                {{ Form::submit('Login', array('class' => 'btn btn-default')) }}
             </div>
         </div>
 

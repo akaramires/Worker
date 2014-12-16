@@ -6,7 +6,6 @@
 
         public function index()
         {
-
             /** @var \Hour $hours */
             $hours = Auth::user()->hours();
 
@@ -86,6 +85,8 @@
             $model->count = $data['hours_count'];
 
             if ($model->save()) {
+                Session::flash('successMsg', 'Hours created successfully');
+
                 return Response::json(array(
                     'success' => true,
                     'id'      => $model->id,
