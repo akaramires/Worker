@@ -127,10 +127,13 @@
         var jsItsDatepicker = $('.js-its-datepicker');
 
         if (jsItsDatepicker.length > 0) {
-            jsItsDatepicker.datetimepicker({
-                pickTime: false,
-                maxDate : new Date()
-            });
+            var options = {pickTime: false};
+
+            if (!jsItsDatepicker.hasClass('js-its-datepicker-all')) {
+                options.maxDate = new Date();
+            }
+
+            jsItsDatepicker.datetimepicker(options);
         }
 
         if (filterDateFrom.length > 0 && filterDateTo.length > 0) {

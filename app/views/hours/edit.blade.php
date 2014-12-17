@@ -14,7 +14,7 @@
         {{ Form::model($hour, array(
             'route' => array('hours.update', $hour->id),
             'method' => 'PUT',
-             'class' => 'form-horizontal form-edit'
+            'class' => 'form-horizontal form-edit'
         )) }}
             {{ Form::hidden('projectDDownId', $hour->project->parent_id); }}
             {{ Form::hidden('taskDDownId', $hour->project_id); }}
