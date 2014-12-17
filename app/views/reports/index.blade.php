@@ -106,18 +106,27 @@
                         <th class="text-center col-hours">Hours</th>
                         <th class="text-center col-project" colspan="2">Project</th>
                         <th>Description</th>
+                        <th class="text-center">Developer</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($hours as $hour)
                         <tr>
-                            <td class="text-center">{{$hour->date}}</td>
-                            <td class="text-center">{{$hour->count}}</td>
-                            <td class="col-project">{{$hour->project_parent}}</td>
-                            <td class="col-project">{{$hour->project_child}}</td>
+                            <td class="text-center">{{ $hour->date }}</td>
+                            <td class="text-center">{{ $hour->count }}</td>
+                            <td class="col-project">{{ $hour->project_parent }}</td>
+                            <td class="col-project">{{ $hour->project_child }}</td>
                             <td>{{ $hour->description }}</td>
+                            <td>{{ $hour->user->last_name }}</td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td></td>
+                        <td class="text-center">{{ $hours_sum }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
 
