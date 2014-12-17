@@ -238,7 +238,7 @@
 
         @if($hours->getLastPage() > 1)
             <div class="text-center panel-body">
-                {{ $hours->links() }}
+                {{ $hours->appends(Input::except('page'))->links(); }}
             </div>
         @endif
 

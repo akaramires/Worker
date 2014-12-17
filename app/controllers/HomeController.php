@@ -19,8 +19,8 @@
                 $searchTo = date('Y-m-d', Input::get('to'));
             }
 
-            if (Input::get('project') != null) {
-                $hours = $hours->where('project_id', '=', Input::get('project'));
+            if (Input::get('task') != null) {
+                $hours = $hours->where('project_id', '=', Input::get('task'));
             }
 
             $hours = $hours->where('date', 'BETWEEN', DB::raw("'$searchFrom' AND '$searchTo'"))->orderBy('date', 'desc');
