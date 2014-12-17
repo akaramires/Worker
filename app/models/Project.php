@@ -45,4 +45,19 @@
         {
             return $this->where('parent_id', '=', $this->id)->get();
         }
+
+        public function hasHoursOrChilds()
+        {
+            $isSingle = true;
+
+            if (Project::where('parent_id', '=', $this->id)->count()) {
+                $isSingle = false;
+            }
+
+            if ($this->hours()->count()) {
+                $isSingle = false;
+            }
+
+            return !$isSingle;
+        }
     }

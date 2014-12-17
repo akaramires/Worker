@@ -74,3 +74,19 @@ body > .container {
 #filter-task {
   width: 200px;
 }
+.projects-list .panel-title .btn {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: 5px;
+  color: white;
+}
+.projects-list .panel-body .list-unstyled li {
+  line-height: 30px;
+}
+.projects-list .panel-body .list-unstyled li .btn {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: 5px;
+  color: white;
+  vertical-align: top;
+}

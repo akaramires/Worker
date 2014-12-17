@@ -75,4 +75,18 @@
                 return Redirect::route('projects.index');
             }
         }
+
+        public function destroy($id)
+        {
+            $project = Project::find($id);
+            if ($project->hasHoursOrChilds()) {
+                Session::flash('errorMsg', 'You do not have access to delete this project.');
+                return Redirect::route('projects.index');
+            }
+
+            $project->delete();
+
+            Session::flash('successMsg', 'Successfully deleted the project!');
+            return Redirect::route('projects.index');
+        }
     }
