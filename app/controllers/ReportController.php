@@ -32,7 +32,6 @@
             $hours_rows = $hours->paginate(10);
 
             foreach ($hours_rows as &$hour) {
-
                 if ($hour->project->parent_id == 0) {
                     $hour->project_parent = $hour->project->title;
                 } else {

@@ -15,7 +15,6 @@
         });
 
         addHours();
-        filterProject();
         filter();
     });
 
@@ -77,55 +76,6 @@
                 pickTime: false,
                 maxDate : new Date()
             });
-        }
-    }
-
-    function filterProject() {
-        var pageLoaded = true;
-
-        var filterProject = $('#filter-project');
-        var filterTask = $('#filter-task');
-
-        if (filterProject.length > 0 && filterTask.length > 0) {
-            filterProject.change(function () {
-                var $this = $(this);
-
-                jQuery.ajax({
-                    url       : '/tasks',
-                    type      : 'POST',
-                    data      : {
-                        option: $this.val()
-                    },
-                    beforeSend: function () {
-                        filterTask.prop("disabled", true);
-                        filterTask.find('option').remove();
-                    },
-                    success   : function (response) {
-
-                        $.each(response, function (index, element) {
-                            filterTask.append('<option value="' + index + '">' + element + '</option>');
-                        });
-
-                        filterTask.prop("disabled", false);
-
-                        if (pageLoaded) {
-                            var filterTaskID = $('[name=filterTaskID]').val();
-                            if (filterTaskID) {
-                                filterTask.val(filterTaskID);
-                            }
-
-                            pageLoaded = false;
-                        } else {
-                            filterTask.val($(filterTask.find('option').get(0)).val())
-                        }
-                    }
-                });
-            });
-        }
-
-        var filterProjectID = $('[name=filterProjectID]').val();
-        if (filterProjectID) {
-            $("#filter-project").val(filterProjectID).trigger('change');
         }
     }
 

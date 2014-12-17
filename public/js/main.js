@@ -35,12 +35,12 @@
         var $ddProject = $('.project-dropdown');
 
         if ($ddProject.length > 0) {
-            var $ddTask = $('.task-dropdown-' + $ddProject.data('destination'));
 
-            if ($ddTask.length > 0) {
+            $ddProject.change(function () {
+                var $this = $(this);
+                var $ddTask = $('.task-dropdown-' + $this.data('destination'));
 
-                $ddProject.change(function () {
-                    var $this = $(this);
+                if ($ddTask.length > 0) {
                     jQuery.ajax({
                         url       : '/projects/childs',
                         type      : 'POST',
@@ -70,8 +70,8 @@
                             }
                         }
                     });
-                });
-            }
+                }
+            });
 
             if ($projectID.val()) {
                 $ddProject.val($projectID.val()).trigger('change');
