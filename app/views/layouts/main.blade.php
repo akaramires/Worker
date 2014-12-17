@@ -27,6 +27,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())
                         @if(in_array(Auth::user()->role->slug, array('admin', 'manager')))
+                            <li><a href="{{ route('reports.index') }}"><i class="fa fa-file"></i> Reports</a></li>
                             <li><a href="{{ route('projects.index') }}"><i class="fa fa-folder"></i> Projects</a></li>
                             <li><a href=""><i class="fa fa-users"></i> Users</a></li>
                         @endif

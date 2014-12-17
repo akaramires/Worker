@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     {{ Form::label('parent', 'Parent') }}
-                    {{ Form::text('parent', $parent ? $parent->title : 'No parent', array('class' => 'form-control', 'disabled' => 'disabled')) }}
+                    {{ Form::label('parent', $parent ? $parent->title : 'No parent', array('class' => 'form-control')) }}
                 </div>
 
                 <div class="form-group">

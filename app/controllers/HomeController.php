@@ -45,7 +45,7 @@
 
                 $hoursInCurMonth = Auth::user()->hours()->where('date', 'BETWEEN', DB::raw("'" . date('Y-m-01') . "' AND '" . date('Y-m-t') . "'"))->sum('count');
 
-                return View::make('developer/hours')
+                return View::make('home.index')
                     ->with('page_title', 'Your hours')
                     ->with('projects', $projects)
                     ->with('hours', $hours)

@@ -38,7 +38,7 @@
                 }
             }
 
-            return View::make('manager/index')
+            return View::make('reports.index')
                 ->with('page_title', 'Reports')
                 ->with('projectsList', $projects)
                 ->with('usersList', $users)
