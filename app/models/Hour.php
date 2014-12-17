@@ -49,7 +49,6 @@
             'hours_description' => 'required',
         );
 
-
         public function user ()
         {
             return $this->belongsTo('User', 'user_id')->withTrashed();

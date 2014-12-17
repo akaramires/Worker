@@ -38,7 +38,6 @@
      */
     class User extends Eloquent implements UserInterface, RemindableInterface
     {
-
         use UserTrait, RemindableTrait, SoftDeletingTrait;
 
         protected $table = 'users';

@@ -31,22 +31,21 @@
      */
     class Project extends Eloquent
     {
-
         use SoftDeletingTrait;
 
         protected $table = 'projects';
 
-        public function hours()
+        public function hours ()
         {
             return $this->hasMany('Hour');
         }
 
-        public function projects()
+        public function projects ()
         {
             return $this->where('parent_id', '=', $this->id)->get();
         }
 
-        public function hasHoursOrChilds()
+        public function hasHoursOrChilds ()
         {
             $isSingle = true;
 
