@@ -39,15 +39,17 @@
                                 <td style="{{ $user->trashed() ? 'opacity: 0.5;' : '' }}">{{$user->username}}</td>
                                 <td style="{{ $user->trashed() ? 'opacity: 0.5;' : '' }}">{{$user->email}}</td>
                                 <td class="text-center">
-                                    @if ($user->trashed())
-                                        {{ Form::open(array('route' => array('users.destroy', $user->id, 'restore' => 1), 'method' => 'delete', 'class' => '')) }}
-                                            <button type="submit" class="btn btn-danger btn-xs">Restore</button>
-                                        {{ Form::close() }}
-                                    @else
-                                        <a class="btn btn-warning btn-xs" href="{{ route('users.edit', array('id' => $user->id)) }}">Edit</a>
-                                        {{ Form::open(array('route' => array('users.destroy', $user->id), 'method' => 'delete', 'class' => '')) }}
-                                            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-                                        {{ Form::close() }}
+                                    @if (!in_array($user->role_id, array(1,2)))
+                                        @if ($user->trashed())
+                                            {{ Form::open(array('route' => array('users.destroy', $user->id, 'restore' => 1), 'method' => 'delete', 'class' => '')) }}
+                                                <button type="submit" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure?')">Restore</button>
+                                            {{ Form::close() }}
+                                        @else
+                                            <a class="btn btn-success btn-xs" href="{{ route('users.edit', array('id' => $user->id)) }}">Edit</a>
+                                            {{ Form::open(array('route' => array('users.destroy', $user->id), 'method' => 'delete', 'class' => '')) }}
+                                                <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">Deactivate</button>
+                                            {{ Form::close() }}
+                                        @endif
                                     @endif
                                 </td>
                             </tr>

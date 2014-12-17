@@ -4,7 +4,7 @@
     {
         public function index()
         {
-            $users = User::where('role_id', '=', 3)->withTrashed()->orderBy('first_name')->get();
+            $users = User::withTrashed()->orderBy('role_id')->orderBy('first_name')->get();
 
             return View::make('acl.index')
                 ->with('page_title', 'Users')
@@ -92,7 +92,7 @@
 
         public function destroy($id)
         {
-            if (Input::get('restore') != null && Input::get('restore') == 1) {
+            if (Input::get('restore') != null && Input::get('restore') == 1 && Input::get('force') == null) {
                 $user = User::onlyTrashed()->where('id', '=', $id)->firstOrFail();
                 if ($user) {
                     if (!in_array($user->role_id, array(1, 2))) {
@@ -104,14 +104,26 @@
                 }
 
                 Session::flash('errorMsg', 'You do not have access to restore this user.');
-            } else {
+            } elseif (Input::get('force') != null && Input::get('force') == 1 && Input::get('restore') == null) {
+                $user = User::onlyTrashed()->find($id);
+                if ($user) {
+                    if (!in_array($user->role_id, array(1, 2))) {
+                        $user->forceDelete();
+
+                        Session::flash('successMsg', 'Successfully deleted the user!');
+                        return Redirect::route('users.index');
+                    }
+                }
+
+                Session::flash('errorMsg', 'You do not have access to delete this user.');
+            } elseif (Input::get('force') == null && Input::get('restore') == null) {
                 $user = User::find($id);
 
                 if ($user) {
                     if (!in_array($user->role_id, array(1, 2))) {
                         $user->delete();
 
-                        Session::flash('successMsg', 'Successfully deleted the user!');
+                        Session::flash('successMsg', 'Successfully deactivated the user!');
                         return Redirect::route('users.index');
                     }
                 }

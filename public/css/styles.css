@@ -94,3 +94,6 @@ body > .container {
 .users-list form {
   display: inline-block;
 }
+.users-list .col-operations {
+  width: 160px !important;
+}
