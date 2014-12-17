@@ -20,9 +20,9 @@
                 <a class="navbar-brand" href="/">Work</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><p class="navbar-text">{{!empty($page_title) ? $page_title :''}}</p></li>
-                </ul>
+                {{--<ul class="nav navbar-nav">--}}
+                    {{--<li><p class="navbar-text">{{!empty($page_title) ? $page_title :''}}</p></li>--}}
+                {{--</ul>--}}
 
                 <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())

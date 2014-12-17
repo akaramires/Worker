@@ -32,6 +32,7 @@
             $hours_rows = $hours->paginate(10);
 
             foreach ($hours_rows as &$hour) {
+
                 if ($hour->project->parent_id == 0) {
                     $hour->project_parent = $hour->project->title;
                 } else {
@@ -41,7 +42,7 @@
             }
 
             return View::make('reports.index')
-                ->with('page_title', 'Reports')
+                ->with('page_title', date('F'))
                 ->with('projectsList', $projects)
                 ->with('usersList', $users)
                 ->with('hours', $hours_rows)

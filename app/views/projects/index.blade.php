@@ -7,18 +7,13 @@
 
 @extends('layouts.main')
 
-@section('content')
-    <div class="row">
-        <div class="col-sm-2">
-            <h4>Projects</h4>
-        </div>
-        <div class="col-sm-2 col-sm-offset-8">
-            {{ HTML::link(route('projects.create'), 'Add project', array('class' => 'btn btn-success btn-block btn-sm')); }}
-        </div>
+@section('page_actions')
+    <div class="col-sm-2 col-sm-offset-8">
+        {{ HTML::link(route('projects.create'), 'Add project', array('class' => 'btn btn-success btn-block btn-sm')); }}
     </div>
+@endsection
 
-    <div class="hr"></div>
-
+@section('content')
     <div class="row projects-list">
         <div class="col-sm-6">
             <div class="panel-group" id="accordion" role="tablist">

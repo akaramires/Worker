@@ -28,7 +28,7 @@
                 $parent = Project::find($project->parent_id);
 
                 return View::make('projects.edit')
-                    ->with('page_title', 'Edit project <b>' . $project->title . '</b>')
+                    ->with('page_title', 'Edit project')
                     ->with('project', $project)
                     ->with('parent', $parent);
             }

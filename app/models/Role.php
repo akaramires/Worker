@@ -36,7 +36,7 @@
 
         public function users ()
         {
-            return $this->hasMany('User', 'role_id');
+            return $this->hasMany('User', 'role_id')->withTrashed();
         }
 
     }

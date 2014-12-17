@@ -7,31 +7,26 @@
 
 @extends('layouts.main')
 
-@section('content')
-    <div class="row">
-        <div class="col-sm-2">
-            <h4>{{date('F')}}</h4>
-        </div>
-        <div class="col-sm-5">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">{{ DateHelper::workDays(); }}</span>
-                    Total days:
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-5">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">{{ DateHelper::workHours(); }}</span>
-                    Total hours:
-                </li>
-            </ul>
-        </div>
+@section('page_actions')
+    <div class="col-sm-5">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge">{{ DateHelper::workDays(); }}</span>
+                Total days:
+            </li>
+        </ul>
     </div>
+    <div class="col-sm-5">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge">{{ DateHelper::workHours(); }}</span>
+                Total hours:
+            </li>
+        </ul>
+    </div>
+@endsection
 
-    <div class="hr"></div>
-
+@section('content')
     <div class="panel panel-default panel-hours">
         <div class="panel-body">
             <div class="row">

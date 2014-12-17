@@ -7,7 +7,7 @@
             $users = User::withTrashed()->orderBy('role_id')->orderBy('first_name')->get();
 
             return View::make('acl.index')
-                ->with('page_title', 'Users')
+                ->with('page_title', 'Developers')
                 ->with('users', $users);
         }
 
@@ -24,7 +24,7 @@
             if ($user) {
                 if (!in_array($user->role_id, array(1, 2))) {
                     return View::make('acl.edit')
-                        ->with('page_title', 'Edit user <b>' . $user->last_name . '</b>')
+                        ->with('page_title', 'Edit user')
                         ->with('user', $user);
                 }
             }

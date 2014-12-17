@@ -31,6 +31,17 @@
         <div class="container">
             @include('partials.flash')
 
+            @if (!empty($page_title))
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h4>{{ $page_title; }}</h4>
+                    </div>
+                    @yield('page_actions')
+                </div>
+
+                <div class="hr"></div>
+            @endif
+
             @yield('content')
         </div>
 

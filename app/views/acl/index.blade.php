@@ -7,18 +7,13 @@
 
 @extends('layouts.main')
 
-@section('content')
-    <div class="row">
-        <div class="col-sm-2">
-            <h4>Developers</h4>
-        </div>
-        <div class="col-sm-2 col-sm-offset-8">
-            {{ HTML::link(route('users.create'), 'Add user', array('class' => 'btn btn-success btn-block btn-sm')); }}
-        </div>
+@section('page_actions')
+    <div class="col-sm-2 col-sm-offset-8">
+        {{ HTML::link(route('users.create'), 'Add user', array('class' => 'btn btn-success btn-block btn-sm')); }}
     </div>
+@endsection
 
-    <div class="hr"></div>
-
+@section('content')
     <div class="row users-list">
         <div class="col-sm-12">
             <table class="table table-condensed table-hover table-bordered table-hours">
