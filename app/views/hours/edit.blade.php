@@ -31,9 +31,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('project') ? 'has-error' : '' }}">
                     {{ Form::label('project', 'Project', array('class' => 'col-sm-3 control-label')) }}
-                    <div class="col-sm-9 {{ $errors->has('project') ? 'has-error' : '' }}">
+                    <div class="col-sm-9">
                         {{ Form::select('project', array(null => 'Please Select') + $projects, '', array(
                             'class' => 'form-control project-dropdown',
                             'data-destination' => ($taskSelect = uniqid()),
@@ -42,9 +42,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('task') ? 'has-error' : '' }}">
                     {{ Form::label('task', 'Task', array('class' => 'col-sm-3 control-label')) }}
-                    <div class="col-sm-9 {{ $errors->has('task') ? 'has-error' : '' }}">
+                    <div class="col-sm-9">
                         {{ Form::select('task', array(null=>'Please Select'), '', array(
                             'class' => 'form-control task-dropdown-' . $taskSelect,
                             'required' => true,
@@ -55,9 +55,9 @@
             </div>
 
             <div class="col-sm-8">
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('count') ? 'has-error' : '' }}">
                     {{ Form::label('count', 'Hours count', array('class' => 'col-sm-3 control-label')) }}
-                    <div class="col-sm-2 {{ $errors->has('count') ? 'has-error' : '' }}">
+                    <div class="col-sm-2">
                         {{ Form::number( 'count', null, array(
                             'class' => 'form-control',
                             'required' => true,
@@ -65,9 +65,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                     {{ Form::label('description', 'Description', array('class' => 'col-sm-3 control-label')) }}
-                    <div class="col-sm-9 {{ $errors->has('description') ? 'has-error' : '' }}">
+                    <div class="col-sm-9">
                         {{ Form::textarea( 'description', null, array(
                             'class' => 'form-control',
                             'required' => true,
