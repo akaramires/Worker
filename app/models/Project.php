@@ -36,9 +36,13 @@
 
         protected $table = 'projects';
 
-        public function hours ()
+        public function hours()
         {
             return $this->hasMany('Hour');
         }
 
+        public function projects()
+        {
+            return $this->where('parent_id', '=', $this->id)->get();
+        }
     }

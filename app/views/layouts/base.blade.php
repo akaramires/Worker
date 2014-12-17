@@ -19,6 +19,7 @@
 
         {{ HTML::style('bower/bootstrap-flat/index.css') }}
         {{ HTML::style('bower/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}
+        {{ HTML::style('bower/fontawesome/css/font-awesome.min.css')}}
         {{ HTML::style('bower/animate/animate.min.css')}}
         {{ HTML::style('css/styles.css')}}
     </head>

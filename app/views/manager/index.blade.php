@@ -18,19 +18,13 @@
         <div class="col-sm-6">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a href="">Add User</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="">Add Project</a>
+                    <span class="badge">{{ DateHelper::workDays(); }}</span>
+                    Total days:
                 </li>
             </ul>
         </div>
         <div class="col-sm-6">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">{{ DateHelper::workDays(); }}</span>
-                    Total days:
-                </li>
                 <li class="list-group-item">
                     <span class="badge">{{ DateHelper::workHours(); }}</span>
                     Total hours:

@@ -10,7 +10,7 @@
         Route::post('/tasks', 'HomeController@tasks');
     });
 
-    Route::group(array('before' => 'role:developer'), function () {
+    Route::group(array('before' => 'auth|role:developer'), function () {
         Route::delete('/{id}', 'HomeController@destroy');
         Route::any('/{date_from}/{date_to}/{task_id}', 'HomeController@index')
             ->where('date_from', '[0-9]+')
@@ -19,10 +19,14 @@
         Route::resource('/', 'HomeController');
     });
 
-    Route::group(array('before' => 'role:admin'), function () {
+    Route::group(array('before' => 'auth|role:admin'), function () {
         Route::resource('admin', 'AdminController');
     });
 
-    Route::group(array('before' => 'role:manager'), function () {
+    Route::group(array('before' => 'auth|role:manager'), function () {
         Route::resource('reports', 'ReportController');
+    });
+
+    Route::group(array('before' => 'auth|roles:manager,admin'), function () {
+        Route::resource('projects', 'ProjectController');
     });

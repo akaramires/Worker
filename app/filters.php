@@ -99,6 +99,15 @@
         }
     });
 
+    Route::filter('roles', function ($route, $request, $value) {
+        $roles = func_get_args();
+        array_shift($roles);
+        array_shift($roles);
+        if (!in_array(Auth::user()->role->slug, $roles)) {
+            return Auth::user()->redirectToOwnPage();
+        }
+    });
+
     App::error(function (Exception $exception, $code) {
         switch ($code) {
             case 404:
