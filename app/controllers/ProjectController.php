@@ -23,19 +23,23 @@
         public function edit($id)
         {
             $project = Project::find($id);
-            $parent = Project::find($project->parent_id);
 
-            return View::make('projects.edit')
-                ->with('page_title', 'Edit project <b>' . $project->title . '</b>')
-                ->with('project', $project)
-                ->with('parent', $parent);
+            if ($project) {
+                $parent = Project::find($project->parent_id);
+
+                return View::make('projects.edit')
+                    ->with('page_title', 'Edit project <b>' . $project->title . '</b>')
+                    ->with('project', $project)
+                    ->with('parent', $parent);
+            }
+
+            Session::flash('errorMsg', 'You do not have access to edit this project.');
+            return Redirect::route('projects.index');
         }
 
         public function update($id)
         {
-            $rules = array(
-                'title' => 'required',
-            );
+            $rules = array('title' => 'required',);
             $validator = Validator::make(Input::all(), $rules);
 
             if ($validator->fails()) {
@@ -44,11 +48,18 @@
                     ->withInput();
             } else {
                 $project = Project::find($id);
-                $project->title = Input::get('title');
-                $project->save();
 
-                Session::flash('successMsg', 'Successfully updated project!');
+                if ($project) {
+                    $project->title = Input::get('title');
+                    $project->save();
+
+                    Session::flash('successMsg', 'Successfully updated project!');
+                    return Redirect::route('projects.index');
+                }
+
+                Session::flash('errorMsg', 'You do not have access to edit this project.');
                 return Redirect::route('projects.index');
+
             }
         }
 
@@ -79,14 +90,20 @@
         public function destroy($id)
         {
             $project = Project::find($id);
-            if ($project->hasHoursOrChilds()) {
-                Session::flash('errorMsg', 'You do not have access to delete this project.');
+
+            if ($project) {
+                if ($project->hasHoursOrChilds()) {
+                    Session::flash('errorMsg', 'You do not have access to delete this project.');
+                    return Redirect::route('projects.index');
+                }
+
+                $project->delete();
+
+                Session::flash('successMsg', 'Successfully deleted the project!');
                 return Redirect::route('projects.index');
             }
 
-            $project->delete();
-
-            Session::flash('successMsg', 'Successfully deleted the project!');
+            Session::flash('errorMsg', 'You do not have access to delete this project.');
             return Redirect::route('projects.index');
         }
     }

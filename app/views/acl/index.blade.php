@@ -34,10 +34,10 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td class="">{{$user->first_name}}</td>
-                                <td class="">{{$user->last_name}}</td>
-                                <td class="">{{$user->username}}</td>
-                                <td class="">{{$user->email}}</td>
+                                <td style="{{ $user->trashed() ? 'opacity: 0.5;' : '' }}">{{$user->first_name}}</td>
+                                <td style="{{ $user->trashed() ? 'opacity: 0.5;' : '' }}">{{$user->last_name}}</td>
+                                <td style="{{ $user->trashed() ? 'opacity: 0.5;' : '' }}">{{$user->username}}</td>
+                                <td style="{{ $user->trashed() ? 'opacity: 0.5;' : '' }}">{{$user->email}}</td>
                                 <td class="text-center">
                                     @if ($user->trashed())
                                         {{ Form::open(array('route' => array('users.destroy', $user->id, 'restore' => 1), 'method' => 'delete', 'class' => '')) }}
