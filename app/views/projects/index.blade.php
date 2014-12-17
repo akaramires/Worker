@@ -9,7 +9,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-2 col-sm-offset-10">
+        <div class="col-sm-2">
+            <h4>Projects</h4>
+        </div>
+        <div class="col-sm-2 col-sm-offset-8">
             {{ HTML::link(route('projects.create'), 'Add project', array('class' => 'btn btn-success btn-block btn-sm')); }}
         </div>
     </div>

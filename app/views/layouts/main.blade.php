@@ -29,7 +29,7 @@
                         @if(in_array(Auth::user()->role->slug, array('admin', 'manager')))
                             <li><a href="{{ route('reports.index') }}"><i class="fa fa-file"></i> Reports</a></li>
                             <li><a href="{{ route('projects.index') }}"><i class="fa fa-folder"></i> Projects</a></li>
-                            <li><a href=""><i class="fa fa-users"></i> Users</a></li>
+                            <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> Users</a></li>
                         @endif
                         <li>{{ HTML::link('reset', Auth::user()->first_name .' ' . Auth::user()->last_name) }}</li>
                         <li>{{ HTML::link('logout', 'Logout') }}</li>

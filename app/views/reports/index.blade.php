@@ -9,13 +9,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-12 text-center">
+        <div class="col-sm-2">
             <h4>{{date('F')}}</h4>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <ul class="list-group">
                 <li class="list-group-item">
                     <span class="badge">{{ DateHelper::workDays(); }}</span>
@@ -23,7 +20,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <ul class="list-group">
                 <li class="list-group-item">
                     <span class="badge">{{ DateHelper::workHours(); }}</span>

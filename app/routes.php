@@ -23,10 +23,8 @@
         Route::resource('admin', 'AdminController');
     });
 
-    Route::group(array('before' => 'auth|role:manager'), function () {
-        Route::resource('reports', 'ReportController');
-    });
-
     Route::group(array('before' => 'auth|roles:manager,admin'), function () {
+        Route::resource('reports', 'ReportController');
         Route::resource('projects', 'ProjectController');
+        Route::resource('users', 'AclController');
     });

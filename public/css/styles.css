@@ -90,3 +90,7 @@ body > .container {
   color: white;
   vertical-align: top;
 }
+.users-list .btn,
+.users-list form {
+  display: inline-block;
+}
