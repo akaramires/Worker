@@ -113,12 +113,4 @@
 
             return Redirect::to(Input::get('redirect'))->with('successMsg', 'The entity was deleted successfully.');
         }
-
-        public function tasks()
-        {
-            $projects = Project::where('parent_id', '=', Input::get('option'))->orderBy('title')->lists('title', 'id');
-
-            return Response::json($projects);
-        }
-
     }

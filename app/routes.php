@@ -7,7 +7,7 @@
     Route::post('reset', 'UserController@resetProcess');
 
     Route::group(array('before' => 'auth'), function () {
-        Route::post('/tasks', 'HomeController@tasks');
+        Route::post('/projects/childs', 'ProjectController@childs');
     });
 
     Route::group(array('before' => 'auth|role:developer'), function () {

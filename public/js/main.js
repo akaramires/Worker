@@ -42,7 +42,7 @@
                 $ddProject.change(function () {
                     var $this = $(this);
                     jQuery.ajax({
-                        url       : '/tasks',
+                        url       : '/projects/childs',
                         type      : 'POST',
                         data      : {
                             option: $this.val()

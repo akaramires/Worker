@@ -8,7 +8,7 @@
 @extends('layouts.main')
 
 @section('page_actions')
-    <div class="col-sm-5">
+    <div class="col-sm-3 col-sm-offset-4">
         <ul class="list-group">
             <li class="list-group-item">
                 <span class="badge">{{ DateHelper::workDays(); }}</span>
@@ -16,7 +16,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-3">
         <ul class="list-group">
             <li class="list-group-item">
                 <span class="badge">{{ DateHelper::workHours(); }}</span>

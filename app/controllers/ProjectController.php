@@ -106,4 +106,11 @@
             Session::flash('errorMsg', 'You do not have access to delete this project.');
             return Redirect::route('projects.index');
         }
+
+        public function childs()
+        {
+            $projects = Project::where('parent_id', '=', Input::get('option'))->orderBy('title')->lists('title', 'id');
+
+            return Response::json($projects);
+        }
     }
