@@ -12,19 +12,27 @@
         <div class="col-sm-6 col-sm-offset-3">
             {{ HTML::ul($errors->all(), array('class' => 'alert alert-danger hide')) }}
 
-            {{ Form::open(array('url' => route('projects.index'))) }}
+            {{ Form::open(array('url' => route('projects.index'), 'class' => 'form-horizontal')) }}
 
-                <div class="form-group">
-                    {{ Form::label('parent_id', 'Parent') }}
-                    {{ Form::select('parent_id', array('No parent') + $parents, Input::old('parent_id'), array('class' => 'form-control')) }}
+                <div class="form-group {{ $errors->has('parent_id') ? 'has-error' : '' }}">
+                    {{ Form::label('parent_id', 'Parent', array('class' => 'col-sm-3 control-label')) }}
+                    <div class="col-sm-9">
+                        {{ Form::select('parent_id', array('No parent') + $parents, Input::old('parent_id'), array('class' => 'form-control')) }}
+                    </div>
+                </div>
+
+                <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
+                    {{ Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) }}
+                    <div class="col-sm-9">
+                        {{ Form::text('title', Input::old('title'), array('class' => 'form-control')) }}
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('title', 'Title') }}
-                    {{ Form::text('title', Input::old('title'), array('class' => 'form-control')) }}
+                    <div class="col-sm-offset-3 col-sm-9">
+                        {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                    </div>
                 </div>
-
-                {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
 
             {{ Form::close() }}
         </div>

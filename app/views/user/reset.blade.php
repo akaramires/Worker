@@ -10,26 +10,16 @@
 @section('content')
     {{ Form::open(array('class' => 'form-horizontal', 'role' => 'form')) }}
 
-        @if ($errors->first('password'))
-            <div class="alert alert-danger hide" role="alert">
-                {{ $errors->first('password') }}
-            </div>
-        @endif
+        {{ HTML::ul($errors->all(), array('class' => 'alert alert-danger hide')) }}
 
-        @if ($errors->first('password_confirmation'))
-            <div class="alert alert-danger hide" role="alert">
-                {{ $errors->first('password_confirmation') }}
-            </div>
-        @endif
-
-        <div class="form-group">
+        <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
             <label class="col-sm-2 col-sm-offset-2 control-label">Password</label>
             <div class="col-sm-4">
                 {{ Form::password('password', array('class' => 'form-control')) }}
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
             <label class="col-sm-2 col-sm-offset-2 control-label">Confirm</label>
             <div class="col-sm-4">
                 {{ Form::password('password_confirmation', array('class' => 'form-control')) }}

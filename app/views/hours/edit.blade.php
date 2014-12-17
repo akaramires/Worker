@@ -9,6 +9,8 @@
 
 @section('content')
     <div class="row">
+        {{ HTML::ul($errors->all(), array('class' => 'alert alert-danger hide')) }}
+
         {{ Form::model($hour, array(
             'route' => array('hours.update', $hour->id),
             'method' => 'PUT',
@@ -81,7 +83,5 @@
                 </div>
             </div>
         {{ Form::close() }}
-
-        {{ HTML::ul($errors->all(), array('class' => 'alert alert-danger hide')) }}
     </div>
 @stop

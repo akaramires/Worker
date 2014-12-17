@@ -14,14 +14,14 @@
 
             {{ Form::model($project, array('route' => array('projects.update', $project->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('parent') ? 'has-error' : '' }}">
                     {{ Form::label('parent', 'Parent', array('class' => 'col-sm-3 control-label')) }}
                     <div class="col-sm-9">
                         {{ Form::label('parent', $parent ? $parent->title : 'No parent', array('class' => 'form-control', 'disabled' => 'disabled')) }}
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                     {{ Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) }}
                     <div class="col-sm-9">
                         {{ Form::text('title', null, array('class' => 'form-control')) }}
