@@ -32,7 +32,7 @@
         var $projectID = $('[name=projectDDownId]');
         var $taskID = $('[name=taskDDownId]');
 
-        var $ddProject = $('.filter-row .project-dropdown');
+        var $ddProject = $('.form-edit .project-dropdown, .filter-row .project-dropdown');
 
         if ($ddProject.length > 0) {
 
@@ -124,6 +124,14 @@
     function initDatePickers() {
         var filterDateFrom = $('#filter-date-from');
         var filterDateTo = $('#filter-date-to');
+        var jsItsDatepicker = $('.js-its-datepicker');
+
+        if (jsItsDatepicker.length > 0) {
+            jsItsDatepicker.datetimepicker({
+                pickTime: false,
+                maxDate : new Date()
+            });
+        }
 
         if (filterDateFrom.length > 0 && filterDateTo.length > 0) {
             filterDateFrom.datetimepicker({

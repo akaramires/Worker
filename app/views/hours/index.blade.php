@@ -170,7 +170,7 @@
                     <div class="col-sm-6">
                         <ul class="list-inline">
                             <li>
-                                {{ Form::select('filter[project]', array(null=>'Please Select') + $projects, '', array(
+                                {{ Form::select('filter[project]', array(null => 'Please Select') + $projects, '', array(
                                     'id' => 'filter-project',
                                     'class' => 'form-control input-sm project-dropdown',
                                     'data-destination' => ($taskSelect = uniqid()),
@@ -217,7 +217,7 @@
                         <td class="col-project">{{$hour->project_child}}</td>
                         <td>{{ $hour->description }}</td>
                         <td class="text-center">
-                            <button data-hours-id="{{$hour->id}}" type="button" class="btn btn-warning btn-sm btn-edit-hours pull-left">Edit</button>
+                            <a class="btn btn-warning btn-sm btn-edit-hours pull-left" href="{{ route('hours.edit', $hour->id) }}">Edit</a>
                             {{ Form::open(array('url' => '/' . $hour->id, 'class' => 'form-delete-hours')) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
                                 {{ Form::hidden('redirect', $_SERVER['REQUEST_URI']) }}

@@ -68,7 +68,7 @@
         {
             switch ($this->role->slug) {
                 case 'developer':
-                    $url = '/';
+                    $url = '/hours';
                     break;
                 case 'manager':
                     $url = '/reports';

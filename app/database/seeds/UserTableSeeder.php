@@ -22,8 +22,8 @@
 
             $users = array(
                 array(
-                    'first_name' => 'Admin',
-                    'last_name'  => 'Admin',
+                    'first_name' => 'John',
+                    'last_name'  => 'Doe',
                     'username'   => 'admin',
                     'email'      => 'e.abdurayimov+1@gmail.com',
                     'password'   => Hash::make('admin'),
@@ -31,8 +31,8 @@
                     'role'       => 1,
                 ),
                 array(
-                    'first_name' => 'Project',
-                    'last_name'  => 'Manager',
+                    'first_name' => 'John',
+                    'last_name'  => 'Doe',
                     'username'   => 'manager',
                     'email'      => 'e.abdurayimov+2@gmail.com',
                     'password'   => Hash::make('temp'),

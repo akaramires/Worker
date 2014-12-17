@@ -9,3 +9,4 @@ Thumbs.db
 .idea
 /app/config/local/database.php
 /app/database/seeds/wp_*
+screens

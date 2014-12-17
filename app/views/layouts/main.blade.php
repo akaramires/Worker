@@ -17,20 +17,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Work</a>
+                <a class="navbar-brand" href="{{ URL::to('/'); }}">Work</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
-                {{--<ul class="nav navbar-nav">--}}
-                    {{--<li><p class="navbar-text">{{!empty($page_title) ? $page_title :''}}</p></li>--}}
-                {{--</ul>--}}
-
                 <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())
+                        @if(Auth::user()->role->slug == 'developer')
+                            <li><a href="{{ route('hours.index') }}"><i class="fa fa-bars"></i> Hours</a></li>
+                        @endif
+
                         @if(in_array(Auth::user()->role->slug, array('admin', 'manager')))
                             <li><a href="{{ route('reports.index') }}"><i class="fa fa-file"></i> Reports</a></li>
                             <li><a href="{{ route('projects.index') }}"><i class="fa fa-folder"></i> Projects</a></li>
+                        @endif
+
+                        @if(Auth::user()->role->slug == 'admin')
                             <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> Users</a></li>
                         @endif
+
                         <li>{{ HTML::link('reset', Auth::user()->first_name .' ' . Auth::user()->last_name) }}</li>
                         <li>{{ HTML::link('logout', 'Logout') }}</li>
                     @endif

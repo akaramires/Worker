@@ -58,7 +58,7 @@
                     <div class="col-sm-5">
                         <ul class="list-inline">
                             <li>
-                                {{ Form::select('filter[project]', array(null=>'Please Select') + $projectsList, '', array(
+                                {{ Form::select('filter[project]', array(null => 'Please Select') + $projectsList, '', array(
                                     'id' => 'filter-project',
                                     'class' => 'form-control input-sm project-dropdown',
                                     'data-destination' => ($taskSelect = uniqid()),
