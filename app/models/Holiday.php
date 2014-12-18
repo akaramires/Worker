@@ -31,6 +31,6 @@
         protected $table = 'holidays';
 
         public static $rules = array(
-            'date' => 'required|date',
+            'date' => 'required|date|unique:holidays',
         );
     }

@@ -9,43 +9,30 @@
 @section('content')
     <div class="row">
         <div class="col-sm-6">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="fa fa-angle-down"></i> Add holidays
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                            {{ HTML::ul($errors->all(), array('class' => 'alert alert-danger hide')) }}
-
-                            {{ Form::open(array('url' => route('admin.index'), 'class' => 'form-horizontal')) }}
-
-                                <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
-                                    {{ Form::label('date', 'Date', array('class' => 'col-sm-3 control-label')) }}
-                                    <div class="col-sm-9">
-                                        {{ Form::text( 'date', null, array(
-                                            'class' => 'form-control js-its-datepicker js-its-datepicker-all',
-                                            'required' => true,
-                                            'data-date-format' => 'YYYY-MM-DD',
-                                        )) }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        {{ Form::submit('Save', array('class' => 'btn btn-primary btn-sm')) }}
-                                    </div>
-                                </div>
-
-                            {{ Form::close() }}
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <h5>Add holiday</h5>
                 </div>
             </div>
+            {{ HTML::ul($errors->all(), array('class' => 'alert alert-danger hide')) }}
+
+            {{ Form::open(array('url' => route('admin.index'), 'class' => 'form-horizontal')) }}
+
+                <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
+                    {{ Form::label('date', 'Date', array('class' => 'col-sm-2 control-label')) }}
+                    <div class="col-sm-7">
+                        {{ Form::text( 'date', null, array(
+                            'class' => 'form-control js-its-datepicker js-its-datepicker-all',
+                            'required' => true,
+                            'data-date-format' => 'YYYY-MM-DD',
+                        )) }}
+                    </div>
+                    <div class="col-sm-3">
+                        {{ Form::submit('Save', array('class' => 'btn btn-primary btn-block')) }}
+                    </div>
+                </div>
+
+            {{ Form::close() }}
 
             <ul class="list-grou">
                 @foreach ($holidays as $month => $holiday)

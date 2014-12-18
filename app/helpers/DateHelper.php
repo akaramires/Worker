@@ -17,8 +17,12 @@
 
         public static function workDays()
         {
-            $dt = new DateTime('now');
+            $dt = new DateTime(date('Y-m-01'));
             for ($d = $days = 0; $d < $dt->format('t'); $d++, $dt->modify('next day')) {
+                if (Holiday::where('date', '=', $dt->format('Y-m-d'))->count()) {
+                    continue;
+                }
+
                 $days += $dt->format('N') < 6 ? 1 : 0;
             }
             return $days;
