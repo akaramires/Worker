@@ -1,6 +1,6 @@
-```
-php artisan ide-helper:models [User]
-```
+```php artisan ide-helper:models [User]```
+
+```php artisan dump-autoload```
 
 ![](https://raw.githubusercontent.com/akaramires/Worker-Laravel/master/screenshot.png)
 

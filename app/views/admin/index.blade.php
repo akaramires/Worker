@@ -48,8 +48,16 @@
             </div>
 
             <ul class="list-grou">
-                @foreach ($holidays as $holiday)
-                    <li class="list-group-item">{{ $holiday->date }}</li>
+                @foreach ($holidays as $month => $holiday)
+                    <li class="list-group-item"><strong>{{ $month }}</strong></li>
+                    @foreach ($holiday as $day)
+                        <li class="list-group-item">
+                            {{ $day->date }}
+                            {{ Form::open(array('route' => array('admin.destroy', $day->id, 'delete' => 'holiday'), 'method' => 'delete', 'class' => 'pull-right form-delete')) }}
+                                <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">Delete</button>
+                            {{ Form::close() }}
+                        </li>
+                    @endforeach
                 @endforeach
             </ul>
         </div>
