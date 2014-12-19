@@ -14,6 +14,7 @@
      * Class Project
      *
      * @property integer                                               $id
+     * @property integer                                               $wp_id
      * @property integer                                               $parent_id
      * @property string                                                $title
      * @property string                                                $slug
@@ -22,6 +23,7 @@
      * @property \Carbon\Carbon                                        $updated_at
      * @property-read \Illuminate\Database\Eloquent\Collection|\Hour[] $hours
      * @method static \Illuminate\Database\Query\Builder|\Project whereId($value)
+     * @method static \Illuminate\Database\Query\Builder|\Project whereWpId($value)
      * @method static \Illuminate\Database\Query\Builder|\Project whereParentId($value)
      * @method static \Illuminate\Database\Query\Builder|\Project whereTitle($value)
      * @method static \Illuminate\Database\Query\Builder|\Project whereSlug($value)

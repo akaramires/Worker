@@ -35,28 +35,10 @@
                     'last_name'  => 'Doe',
                     'username'   => 'manager',
                     'email'      => 'e.abdurayimov+2@gmail.com',
-                    'password'   => Hash::make('temp'),
-                    'active'     => 0,
+                    'password'   => Hash::make('manager'),
+                    'active'     => 1,
                     'role'       => 2,
-                ),
-                array(
-                    'first_name' => 'Elmar',
-                    'last_name'  => 'Abdurayimov',
-                    'username'   => 'akaramires',
-                    'email'      => 'e.abdurayimov@gmail.com',
-                    'password'   => Hash::make('temp'),
-                    'active'     => 0,
-                    'role'       => 3,
-                ),
-                array(
-                    'first_name' => 'Test',
-                    'last_name'  => 'Test',
-                    'username'   => 'test',
-                    'email'      => 'test@gmail.com',
-                    'password'   => Hash::make('test'),
-                    'active'     => 0,
-                    'role'       => 3,
-                ),
+                )
             );
 
             $roleModels = array();
@@ -76,6 +58,33 @@
                 $userModel->password   = $user['password'];
                 $userModel->active     = $user['active'];
                 $userModel->role_id    = $user['role'];
+                $userModel->save();
+            }
+
+//            $table = require(app_path() . '/database/seeds/wp_users.php');
+//            foreach ($table as $row) {
+//                DB::table('wp_users2')->insert($row);
+//            }
+
+            $wpUsers = DB::table('wp_users')->get();
+            foreach ($wpUsers as $wpUser) {
+                if (in_array($wpUser->user_login, array('pm', 'admin', 'm4a1fox'))) {
+                    continue;
+                }
+
+                $display_name = explode(' ', $wpUser->display_name);
+
+                $userModel             = new User;
+                $userModel->wp_id      = $wpUser->ID;
+                $userModel->first_name = $display_name[0];
+                $userModel->last_name  = empty($display_name[1]) ? 'Doe' : $display_name[1];
+                $userModel->username   = $wpUser->user_login;
+                $userModel->email      = $wpUser->user_email;
+                $userModel->password   = Hash::make('temp');
+                $userModel->active     = 0;
+                $userModel->role_id    = 3;
+                $userModel->created_at = $wpUser->user_registered;
+                $userModel->updated_at = $wpUser->user_registered;
                 $userModel->save();
             }
         }

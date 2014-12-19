@@ -13,11 +13,7 @@
         {
             DB::table('holidays')->delete();
 
-            Holiday::create(array('date' => '2014-10-31'));
-            Holiday::create(array('date' => '2014-11-01'));
             Holiday::create(array('date' => '2014-12-31'));
             Holiday::create(array('date' => '2015-01-01'));
-            Holiday::create(array('date' => '2015-02-28'));
-            Holiday::create(array('date' => '2015-03-01'));
         }
     }

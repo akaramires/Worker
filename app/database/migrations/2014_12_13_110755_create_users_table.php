@@ -23,6 +23,7 @@
 
             Schema::create('users', function (Blueprint $table) {
                 $table->increments('id');
+                $table->integer('wp_id');
                 $table->string('username', 32)->unique();
                 $table->string('email')->unique();
                 $table->string('password', 60);
