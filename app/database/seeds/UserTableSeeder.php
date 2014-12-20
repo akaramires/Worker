@@ -61,14 +61,9 @@
                 $userModel->save();
             }
 
-//            $table = require(app_path() . '/database/seeds/wp_users.php');
-//            foreach ($table as $row) {
-//                DB::table('wp_users2')->insert($row);
-//            }
-
             $wpUsers = DB::table('wp_users')->get();
             foreach ($wpUsers as $wpUser) {
-                if (in_array($wpUser->user_login, array('pm', 'admin', 'm4a1fox'))) {
+                if ($wpUser->user_login == 'admin') {
                     continue;
                 }
 

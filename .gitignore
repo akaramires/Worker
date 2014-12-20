@@ -10,3 +10,4 @@ Thumbs.db
 /app/config/local/database.php
 /app/database/seeds/wp_*
 screens
+app/database/seeds/wp/

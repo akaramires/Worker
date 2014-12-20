@@ -14,6 +14,7 @@
      * Class Hour
      *
      * @property integer        $id
+     * @property integer        $wp_id
      * @property integer        $user_id
      * @property integer        $project_id
      * @property string         $description
@@ -25,6 +26,7 @@
      * @property-read \User     $user
      * @property-read \Project  $project
      * @method static \Illuminate\Database\Query\Builder|\Hour whereId($value)
+     * @method static \Illuminate\Database\Query\Builder|\Hour whereWpId($value)
      * @method static \Illuminate\Database\Query\Builder|\Hour whereUserId($value)
      * @method static \Illuminate\Database\Query\Builder|\Hour whereProjectId($value)
      * @method static \Illuminate\Database\Query\Builder|\Hour whereDescription($value)

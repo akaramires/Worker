@@ -13,76 +13,36 @@
         {
             DB::table('hours')->delete();
 
-            $users = $users = Role::find(3)->users()->get();
-            foreach ($users as $user) {
-                $posts = DB::table('wp_posts')
-                    ->where('post_status', '=', 'publish')
-                    ->where('post_type', '=', 'post')
-                    ->where('post_parent', '=', 0)
-                    ->where('post_author', '=', $user->wp_id)
-                    ->get();
-            }
-            
-//            $faker = Faker\Factory::create();
-//
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
-//            Hour::create(array('user_id' => 3, 'project_id' => rand(79, 80), 'description' => $faker->text, 'count' => rand(1, 8),
-//                               'date'    => $faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d')));
+            $wp = '/var/www/wordpress/public_html/wp-blog-header.php';
 
+            if (file_exists($wp)) {
+                define('WP_USE_THEMES', false);
+                require('/var/www/wordpress/public_html/wp-blog-header.php');
+
+                $projects = Project::where('parent_id', '!=', 0)->get();
+
+                foreach ($projects as $project) {
+                    $query = new WP_Query('cat=' . $project->wp_id . '&orderby=ID&order=ASC&posts_per_page=-1');
+
+                    if ($query->have_posts()) :
+                        while ($query->have_posts()) : $query->the_post();
+                            $data = array(
+                                'wp_id'       => get_the_ID(),
+                                'user_id'     => User::where('wp_id', '=', get_post_field('post_author', get_the_ID()))->first()->id,
+                                'project_id'  => $project->id,
+                                'description' => get_the_content(),
+                                'count'       => get_post_meta(get_the_ID(), 'hours', true),
+                                'date'        => (new DateTime(get_post_meta(get_the_ID(), 'date', true)))->format('Y-m-d'),
+                                'created_at'  => (new DateTime(get_the_date()))->format('Y-m-d H:i:s'),
+                                'updated_at'  => (new DateTime(get_the_date()))->format('Y-m-d H:i:s'),
+                            );
+
+
+                            Hour::create($data);
+                        endwhile;
+                    endif;
+                    wp_reset_query();
+                }
+            }
         }
     }
