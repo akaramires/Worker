@@ -11,3 +11,4 @@ Thumbs.db
 /app/database/seeds/wp_*
 screens
 app/database/seeds/wp/
+app/database/seeds/passwords.php

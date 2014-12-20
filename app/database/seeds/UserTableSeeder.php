@@ -14,6 +14,8 @@
             DB::table('roles')->delete();
             DB::table('users')->delete();
 
+            $passwords = require(app_path() . '/database/seeds/passwords.php');
+
             $roles = array(
                 'admin'     => 'Administrator',
                 'manager'   => 'Project Manager',
@@ -26,7 +28,7 @@
                     'last_name'  => 'Doe',
                     'username'   => 'admin',
                     'email'      => 'e.abdurayimov+1@gmail.com',
-                    'password'   => Hash::make('admin'),
+                    'password'   => Hash::make($passwords['admin']),
                     'active'     => 1,
                     'role'       => 1,
                 ),
@@ -35,7 +37,7 @@
                     'last_name'  => 'Doe',
                     'username'   => 'manager',
                     'email'      => 'e.abdurayimov+2@gmail.com',
-                    'password'   => Hash::make('manager'),
+                    'password'   => Hash::make($passwords['manager']),
                     'active'     => 1,
                     'role'       => 2,
                 )

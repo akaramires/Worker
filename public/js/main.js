@@ -32,7 +32,7 @@
         var $projectID = $('[name=projectDDownId]');
         var $taskID = $('[name=taskDDownId]');
 
-        var $ddProject = $('.form-edit .project-dropdown, .filter-row .project-dropdown');
+        var $ddProject = $('.project-dropdown');
 
         if ($ddProject.length > 0) {
 
