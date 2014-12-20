@@ -109,8 +109,7 @@
     });
 
     App::error(function (Exception $exception, $code) {
-//        switch ($code) {
-//            case 404:
-//                return Response::view('layouts.404', array(), 404);
-//        }
+        if (App::environment() != 'local') {
+            return Response::view('layouts.404', array(), 404);
+        }
     });

@@ -18,7 +18,9 @@
 
         public function process ()
         {
-            if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))) {
+            if (Auth::attempt(array('username' => Input::get('username'),
+                                    'password' => Input::get('password')))
+            ) {
                 return Redirect::to('/')
                     ->with('successMsg', 'You are now logged in!');
             } else {
@@ -63,4 +65,10 @@
 
             return Redirect::to('/')->with('successMsg', 'Your password was successfully changed.');
         }
+
+//        public function set_new_password ()
+//        {
+//            return View::make('user.set_new_password')
+//                ->with('page_title', 'Set new password');
+//        }
     }

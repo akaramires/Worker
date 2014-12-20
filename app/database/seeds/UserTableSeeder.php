@@ -75,8 +75,8 @@
                 $userModel->last_name  = empty($display_name[1]) ? 'Doe' : $display_name[1];
                 $userModel->username   = $wpUser->user_login;
                 $userModel->email      = $wpUser->user_email;
-                $userModel->password   = Hash::make('temp');
-                $userModel->active     = 0;
+                $userModel->password   = Hash::make($wpUser->user_login);
+                $userModel->active     = 1;
                 $userModel->role_id    = 3;
                 $userModel->created_at = $wpUser->user_registered;
                 $userModel->updated_at = $wpUser->user_registered;
