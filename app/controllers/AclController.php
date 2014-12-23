@@ -22,11 +22,9 @@
             $user = User::find($id);
 
             if ($user) {
-                if (!in_array($user->role_id, array(1, 2))) {
-                    return View::make('acl.edit')
-                        ->with('page_title', 'Edit user')
-                        ->with('user', $user);
-                }
+                return View::make('acl.edit')
+                    ->with('page_title', 'Edit user')
+                    ->with('user', $user);
             }
 
             Session::flash('errorMsg', 'You do not have access to edit this user.');
@@ -55,16 +53,14 @@
                 $user = User::find($id);
 
                 if ($user) {
-                    if (!in_array($user->role_id, array(1, 2))) {
-                        $user->first_name = Input::get('first_name');
-                        $user->last_name  = Input::get('last_name');
-                        $user->username   = Input::get('username');
-                        $user->email      = Input::get('email');
-                        $user->password   = Hash::make(Input::get('password'));
-                        $user->save();
+                    $user->first_name = Input::get('first_name');
+                    $user->last_name  = Input::get('last_name');
+                    $user->username   = Input::get('username');
+                    $user->email      = Input::get('email');
+                    $user->password   = Hash::make(Input::get('password'));
+                    $user->save();
 
-                        Session::flash('successMsg', 'Successfully updated user!');
-                    }
+                    Session::flash('successMsg', 'Successfully updated user!');
                 } else {
                     Session::flash('errorMsg', 'You do not have access to edit this user.');
                 }

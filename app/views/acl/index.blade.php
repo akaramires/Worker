@@ -45,6 +45,8 @@
                                             <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">Deactivate</button>
                                         {{ Form::close() }}
                                     @endif
+                                @else
+                                    <a class="btn btn-success btn-xs" href="{{ route('users.edit', array('id' => $user->id)) }}">Edit</a>
                                 @endif
                             </td>
                         </tr>
