@@ -21,7 +21,23 @@
             if (Auth::attempt(array('username' => Input::get('username'),
                                     'password' => Input::get('password')))
             ) {
-                return Redirect::to('/')
+
+                switch (Auth::user()->role->slug) {
+                    case 'developer':
+                        $url = '/hours';
+                        break;
+                    case 'manager':
+                        $url = '/reports';
+                        break;
+                    case 'admin':
+                        $url = '/admin';
+                        break;
+                    default:
+                        $url = 'login';
+                        break;
+                }
+
+                return Redirect::to($url)
                     ->with('successMsg', 'You are now logged in!');
             } else {
                 return Redirect::to('login')
