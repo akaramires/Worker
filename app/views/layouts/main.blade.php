@@ -26,12 +26,12 @@
                             <li><a href="{{ route('hours.index') }}"><i class="fa fa-bars"></i> Hours</a></li>
                         @endif
 
-                        @if(in_array(Auth::user()->role->slug, array('admin', 'manager')))
+                        @if(in_array(Auth::user()->role->slug, array('admin', 'manager', 'super')))
                             <li><a href="{{ route('reports.index') }}"><i class="fa fa-file"></i> Reports</a></li>
                             <li><a href="{{ route('projects.index') }}"><i class="fa fa-folder"></i> Projects</a></li>
                         @endif
 
-                        @if(Auth::user()->role->slug == 'admin')
+                        @if(Auth::user()->role->slug == 'admin' || Auth::user()->role->slug == 'super')
                             <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> Users</a></li>
                         @endif
 

@@ -32,6 +32,9 @@
                     case 'admin':
                         $url = '/admin';
                         break;
+                    case 'super':
+                        $url = '/admin';
+                        break;
                     default:
                         $url = 'login';
                         break;

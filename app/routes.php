@@ -22,12 +22,12 @@
         Route::resource('hours', 'HoursController');
     });
 
-    Route::group(array('before' => 'auth|role:admin'), function () {
+    Route::group(array('before' => 'auth|roles:admin,super'), function () {
         Route::resource('users', 'AclController');
         Route::resource('admin', 'AdminController');
     });
 
-    Route::group(array('before' => 'auth|roles:manager,admin'), function () {
+    Route::group(array('before' => 'auth|roles:manager,admin,super'), function () {
         Route::resource('reports', 'ReportController');
         Route::resource('projects', 'ProjectController');
     });
