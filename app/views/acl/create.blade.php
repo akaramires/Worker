@@ -55,6 +55,14 @@
                         {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
                     </div>
                 </div>
+            <div class="form-group">
+                {{ Form::label('role_id', 'Role', array('class' => 'col-sm-3 control-label')) }}
+                <div class="col-sm-9">
+                    {{ Form::select('role_id',$roles, null,array(
+                                        'class' => 'form-control input-sm project-dropdown',
+                                    )) }}
+                </div>
+            </div>
 
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9">

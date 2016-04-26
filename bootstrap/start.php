@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead', 'home', 'lenovo'),
+	'local' => array('homestead', 'home', 'lenovo', 'max-System-Product-Name'),
 
 ));
 

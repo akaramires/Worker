@@ -12,18 +12,20 @@
         }
 
         public function create ()
-        {
+        {   $roles= Role::all()->lists('name', 'id');
             return View::make('acl.create')
+                ->with('roles', $roles)
                 ->with('page_title', 'Add user');
         }
 
         public function edit ($id)
         {
             $user = User::find($id);
-
+            $roles= Role::all()->lists('name', 'id');
             if ($user && $user->role_id != 4) {
                 return View::make('acl.edit')
                     ->with('page_title', 'Edit user')
+                    ->with('roles', $roles)
                     ->with('user', $user);
             }
 
@@ -58,6 +60,7 @@
                     $user->username   = Input::get('username');
                     $user->email      = Input::get('email');
                     $user->password   = Hash::make(Input::get('password'));
+                    $user->role_id    = Input::get('role_id');
                     $user->save();
 
                     Session::flash('successMsg', 'Successfully updated user!');
@@ -78,13 +81,18 @@
                     ->withErrors($validator)
                     ->withInput();
             } else {
+
                 $user             = new User;
                 $user->first_name = Input::get('first_name');
                 $user->last_name  = Input::get('last_name');
                 $user->username   = Input::get('username');
                 $user->email      = Input::get('email');
                 $user->password   = Hash::make(Input::get('password'));
-                $user->role_id    = 3;
+                $user->role_id    = Input::get('role_id');
+
+
+
+
                 $user->save();
 
                 Session::flash('successMsg', 'Successfully created user!');

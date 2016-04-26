@@ -23,6 +23,7 @@
         public function edit($id)
         {
             $project = Project::find($id);
+            $clients=User::where('role_id', '=',5)->orderBy('id')->lists('last_name', 'id');
 
             if ($project) {
                 $parent = Project::find($project->parent_id);
@@ -30,6 +31,7 @@
                 return View::make('projects.edit')
                     ->with('page_title', 'Edit project')
                     ->with('project', $project)
+                    ->with('clients', $clients)
                     ->with('parent', $parent);
             }
 
@@ -51,6 +53,7 @@
 
                 if ($project) {
                     $project->title = Input::get('title');
+                    $project->client_id = Input::get('client_id');
                     $project->save();
 
                     Session::flash('successMsg', 'Successfully updated project!');

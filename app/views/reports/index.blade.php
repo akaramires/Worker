@@ -75,19 +75,23 @@
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-sm-2 text-right">
+                        @if(!empty($usersList))
                         {{ Form::select('filter[dev]', array(null=>'Please Select') + $usersList, Input::get('dev') ? Input::get('dev') : '', array(
                             'id' => 'filter-dev',
                             'class' => 'form-control input-sm',
                             'required' => true,
                         ) ); }}
+                        @endif
                     </div>
+
                     <div class="col-sm-2 text-right">
                         {{ Form::button('Search', array(
                             'id' => 'filter_run',
                             'class' => 'btn btn-info btn-sm',
                         ) )}}
-                        {{ HTML::link('/', 'Clear', array('class' => 'btn btn-default btn-sm') ) }}
+                        {{--{{ HTML::link('/', 'Clear', array('class' => 'btn btn-default btn-sm') ) }}--}}
                     </div>
                 {{ Form::close() }}
             </div>

@@ -35,6 +35,9 @@
                     case 'super':
                         $url = '/admin';
                         break;
+                    case 'client':
+                        $url = '/reports_clients';
+                        break;
                     default:
                         $url = 'login';
                         break;

@@ -31,3 +31,8 @@
         Route::resource('reports', 'ReportController');
         Route::resource('projects', 'ProjectController');
     });
+
+    Route::group(array('before' => 'auth|roles:manager,admin,super,client'), function () {
+    Route::resource('reports_clients', 'ReportClientsController');
+    Route::resource('projects', 'ProjectController');
+    });

@@ -20,14 +20,20 @@
                         {{ Form::label('parent', $parent ? $parent->title : 'No parent', array('class' => 'form-control', 'disabled' => 'disabled')) }}
                     </div>
                 </div>
-
                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                     {{ Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) }}
                     <div class="col-sm-9">
                         {{ Form::text('title', null, array('class' => 'form-control')) }}
                     </div>
                 </div>
-
+                <div class="form-group">
+                    {{ Form::label('client_id', 'Client', array('class' => 'col-sm-3 control-label')) }}
+                    <div class="col-sm-9">
+                        {{ Form::select('client_id', array(0 => 'None') + $clients, null, array(
+                                        'class' => 'form-control input-sm project-dropdown',
+                                    )); }}
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9">
                         {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
