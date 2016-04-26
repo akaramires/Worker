@@ -8,9 +8,14 @@ class ReportClientsController extends BaseController
         $searchTo = date('Y-m-t');
 
         $users = array();
+
         $projects = Project::where('parent_id', '=', 0)->where('client_id', '=', Auth::id())->orderBy('title')->lists('title', 'id');
 
-        $oneProject=Project::whereIn('parent_id',array_keys($projects))->lists('id');
+        if(empty($projects)){
+            $oneProject=Project::whereIn('parent_id', array(''))->lists('id');
+        } else{
+            $oneProject=Project::whereIn('parent_id', array_keys($projects))->lists('id');
+        }
 
         $hours = Hour::whereIn('project_id',$oneProject)->orderBy('date', 'desc');
 
